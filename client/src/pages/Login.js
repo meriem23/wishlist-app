@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { Form, Input, Button, Typography, Image } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { loginUser } from "../actions/authActions";
 
 const Login = () => {
@@ -26,26 +26,13 @@ const Login = () => {
     }
   }, [isAuth]);
   const { Title } = Typography;
-  const layout = {
-    labelCol: {
-      span: 8,
-    },
-    wrapperCol: {
-      span: 18,
-    },
-  };
-  const tailLayout = {
-    wrapperCol: {
-      offset: 12,
-      span: 8,
-    },
-  };
   return (
-    <div>
-      <Image width={40} src="./wishlist.png" />
-      <Title level={2}>Sign In</Title>
+    <div className="formStyle">
+      <div className="formText">
+        <Image width={35} src="./wishlist.png" />
+        <Title level={3}>Sign In</Title>
+      </div>
       <Form
-        {...layout}
         name="basic"
         initialValues={{
           remember: true,
@@ -69,7 +56,7 @@ const Login = () => {
           ]}
         >
           <Input
-            prefix={<UserOutlined className="site-form-item-icon" />}
+            prefix={<MailOutlined className="site-form-item-icon" />}
             placeholder="Your email"
             name="email"
             onChange={handleChange}
@@ -91,7 +78,7 @@ const Login = () => {
             onChange={handleChange}
           />
         </Form.Item>
-        <Form.Item {...tailLayout}>
+        <Form.Item>
           <Button type="primary" htmlType="submit" onClick={login}>
             Sign In
           </Button>

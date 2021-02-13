@@ -1,4 +1,5 @@
-import { Form, Input, Button, Typography } from "antd";
+import { Form, Input, Button, Typography, Image } from "antd";
+import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../actions/authActions";
@@ -27,25 +28,14 @@ const Register = () => {
     dispatch(registerUser(user));
   };
   const { Title } = Typography;
-  const layout = {
-    labelCol: {
-      span: 8,
-    },
-    wrapperCol: {
-      span: 18,
-    },
-  };
-  const tailLayout = {
-    wrapperCol: {
-      offset: 12,
-      span: 8,
-    },
-  };
+
   return (
-    <div>
-      <Title level={2}>Register</Title>
+    <div className="formStyle">
+      <div className="formText">
+        <Image width={35} src="./wishlist.png" />
+        <Title level={3}>Register</Title>
+      </div>
       <Form
-        {...layout}
         style={{
           width: 310,
           display: "flex",
@@ -54,23 +44,23 @@ const Register = () => {
           marginTop: 15,
         }}
       >
-        <Form.Item label="First Name" name="fname">
+        <Form.Item>
           <Input
-            placeholder="Your first name"
+            prefix={<UserOutlined className="site-form-item-icon" />}
+            placeholder="Your First Name"
             name="fname"
             onChange={handleChange}
           />
         </Form.Item>
-        <Form.Item label="Last Name" name="lname">
+        <Form.Item>
           <Input
-            placeholder="Your last name"
+            prefix={<UserOutlined className="site-form-item-icon" />}
+            placeholder="Your Last Name"
             name="lname"
             onChange={handleChange}
           />
         </Form.Item>
         <Form.Item
-          label="Email"
-          name="email"
           rules={[
             {
               required: true,
@@ -80,15 +70,14 @@ const Register = () => {
           ]}
         >
           <Input
-            placeholder="Your email"
+            prefix={<MailOutlined className="site-form-item-icon" />}
+            placeholder="Your Email"
             name="email"
             onChange={handleChange}
           />
         </Form.Item>
 
         <Form.Item
-          label="Password"
-          name="password"
           rules={[
             {
               required: true,
@@ -97,12 +86,13 @@ const Register = () => {
           ]}
         >
           <Input.Password
-            placeholder="Your password"
+            prefix={<LockOutlined className="site-form-item-icon" />}
+            placeholder="Your Password"
             name="password"
             onChange={handleChange}
           />
         </Form.Item>
-        <Form.Item {...tailLayout}>
+        <Form.Item>
           <Button type="primary" htmlType="submit" onClick={registerNew}>
             Register
           </Button>

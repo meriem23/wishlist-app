@@ -5,6 +5,7 @@ import {
   LOAD_USER_SUCCESS,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
+  LOGOUT,
 } from "../actions/types";
 
 let initState = {
@@ -44,6 +45,13 @@ const authReducer = (state = initState, { type, payload }) => {
         isAuth: false,
         errors: payload,
         isLoadingUser: false,
+      };
+    case LOGOUT:
+      localStorage.removeItem("token");
+      return {
+        isAuth: false,
+        errors: null,
+        user: null,
       };
     default:
       return state;

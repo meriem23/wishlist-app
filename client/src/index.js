@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import { Spin, Space } from "antd";
 import App from "./App";
 import { Provider, useSelector, useDispatch } from "react-redux";
 import store from "./store";
@@ -15,7 +16,13 @@ const ParentApp = ({ children }) => {
       dispatch(loadUser());
     }
   }, []);
-  return isLoadingUser && token ? <p>Loading</p> : children;
+  return isLoadingUser && token ? (
+    <Space size="middle">
+      <Spin />
+    </Space>
+  ) : (
+    children
+  );
 };
 ReactDOM.render(
   <Provider store={store}>

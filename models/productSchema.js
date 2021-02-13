@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
+const User = require("./userSchema");
+const Schema = mongoose.Schema;
 
 const productSchema = mongoose.Schema({
-  prodUser: String,
+  prodOwner: { type: Schema.Types.ObjectId, ref: "User" },
   prodName: String,
   prodDesc: String,
-  prodImage: String,
+  prodImage: { type: String, default: "./utils/default-product-image.png" },
   prodStatus: String,
   addProdDate: { type: Date, default: Date.now },
 });

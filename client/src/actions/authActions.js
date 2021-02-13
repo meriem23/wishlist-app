@@ -6,6 +6,7 @@ import {
   LOAD_USER_SUCCESS,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
+  LOGOUT,
 } from "./types";
 import setToken from "../setToken";
 
@@ -59,4 +60,10 @@ export const loginUser = (data) => (dispatch) => {
         payload: err.response.data.msg,
       })
     );
+};
+
+export const logoutUser = () => (dispatch) => {
+  dispatch({
+    type: LOGOUT,
+  });
 };
