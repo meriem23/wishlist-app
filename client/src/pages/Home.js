@@ -1,15 +1,10 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadUser } from "../actions/authActions";
-import { Avatar, Menu, Dropdown } from "antd";
+import { Avatar, Menu, Dropdown, Button } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 
 const Home = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  useEffect(() => {
-    dispatch(loadUser());
-  }, []);
   const menu = (
     <Menu>
       <Menu.Item>
@@ -23,15 +18,18 @@ const Home = () => {
         <div>
           <h1>hello from home</h1>
           <Dropdown overlay={menu}>
-            <Avatar
-              shape="square"
-              size="large"
-              style={{
-                backgroundColor: "#4bb2f2",
-                textTransform: "uppercase",
-              }}
-              icon={`${user.lname.slice(0, 1)} ${user.fname.slice(0, 1)}`}
-            />
+            <Button className="btn">
+              <Avatar
+                shape="square"
+                size={50}
+                // style={{
+                //   backgroundColor: "#4bb2f2",
+                //   textTransform: "uppercase",
+                // }}
+                icon={`${user.lname.slice(0, 1)} ${user.fname.slice(0, 1)}`}
+              />
+              <DownOutlined />
+            </Button>
           </Dropdown>
         </div>
       )}

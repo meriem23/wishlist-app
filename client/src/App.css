@@ -4,3 +4,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+.btn {
+  background-color: red;
+  height: fit-content;
+}

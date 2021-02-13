@@ -12,6 +12,7 @@ let initState = {
   user: null,
   isAuth: false,
   errors: null,
+  isLoadingUser: true,
 };
 
 const authReducer = (state = initState, { type, payload }) => {
@@ -21,6 +22,8 @@ const authReducer = (state = initState, { type, payload }) => {
         ...state,
         user: payload,
         errors: null,
+        isLoadingUser: false,
+        isAuth: true,
       };
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
@@ -30,6 +33,7 @@ const authReducer = (state = initState, { type, payload }) => {
         token: payload.token,
         isAuth: true,
         errors: null,
+        isLoadingUser: false,
       };
     case LOGIN_FAIL:
     case LOAD_USER_FAIL:
@@ -39,6 +43,7 @@ const authReducer = (state = initState, { type, payload }) => {
         ...state,
         isAuth: false,
         errors: payload,
+        isLoadingUser: false,
       };
     default:
       return state;

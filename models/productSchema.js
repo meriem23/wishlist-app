@@ -4,9 +4,9 @@ const productSchema = mongoose.Schema({
   prodUser: String,
   prodName: String,
   prodDesc: String,
-  prodImage:String,
-  prodStatus:[],
-  addProdDate: { type: Date, default: Date.now }
+  prodImage: String,
+  prodStatus: String,
+  addProdDate: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model("product", productSchema);
