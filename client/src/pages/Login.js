@@ -1,16 +1,30 @@
-import { useState } from "react";
-import {Link} from 'react-router-dom'
-import { Form, Input, Button, Typography } from "antd";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { Form, Input, Button, Typography, Image } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { loginUser } from "../actions/authActions";
 
 const Login = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+  const { isAuth } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const history = useHistory();
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
+  const login = (e) => {
+    e.preventDefault();
+    dispatch(loginUser(user));
+  };
+  useEffect(() => {
+    if (isAuth) {
+      history.push("/home");
+    }
+  }, [isAuth]);
   const { Title } = Typography;
   const layout = {
     labelCol: {
@@ -28,6 +42,7 @@ const Login = () => {
   };
   return (
     <div>
+      <Image width={40} src="./wishlist.png" />
       <Title level={2}>Sign In</Title>
       <Form
         {...layout}
@@ -77,7 +92,7 @@ const Login = () => {
           />
         </Form.Item>
         <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" onClick={login}>
             Sign In
           </Button>
         </Form.Item>

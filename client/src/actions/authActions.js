@@ -7,6 +7,7 @@ import {
   LOGIN_FAIL,
   LOGIN_SUCCESS,
 } from "./types";
+import setToken from "../setToken";
 
 export const registerUser = (user) => (dispatch) => {
   axios
@@ -20,6 +21,41 @@ export const registerUser = (user) => (dispatch) => {
     .catch((err) =>
       dispatch({
         type: REGISTER_FAIL,
+        payload: err.response.data.msg,
+      })
+    );
+};
+
+export const loadUser = () => (dispatch) => {
+  setToken();
+  axios
+    .get("http://localhost:5000/login/loadUser")
+    .then((res) =>
+      dispatch({
+        type: LOAD_USER_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: LOAD_USER_FAIL,
+        payload: err.response.data.msg,
+      })
+    );
+};
+
+export const loginUser = (data) => (dispatch) => {
+  axios
+    .post("http://localhost:5000/login/loginUser", data)
+    .then((res) =>
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: LOGIN_FAIL,
         payload: err.response.data.msg,
       })
     );

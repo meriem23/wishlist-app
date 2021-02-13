@@ -8,14 +8,14 @@ const User = require("../models/userSchema");
 require("dotenv").config();
 
 // Load Connected User
-router.get("/", authMiddleware, (req, res) => {
+router.get("/loadUser", authMiddleware, (req, res) => {
   User.findById(req.userId)
     .select("-password -__v")
     .then((user) => {
       if (!user) {
         return res.status(404).json({ msg: "User not found." });
       }
-      res.status(200).json(user);
+      res.status(200).send(user);
     })
     .catch((err) => {
       console.log(err.message);
@@ -25,7 +25,7 @@ router.get("/", authMiddleware, (req, res) => {
 
 // Login User
 router.post(
-  "/",
+  "/loginUser",
   [
     body("email", "Please enter your email.").isEmail(),
     body("password", "Please enter your password.").notEmpty(),

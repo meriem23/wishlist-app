@@ -16,7 +16,7 @@ const Register = () => {
 
   useEffect(() => {
     if (isAuth) {
-      history.push("/");
+      history.push("/home");
     }
   }, [isAuth]);
   const handleChange = (e) => {
