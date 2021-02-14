@@ -38,10 +38,11 @@ export const loadUser = () => (dispatch) => {
       })
     )
     .catch((err) =>
-      dispatch({
-        type: LOAD_USER_FAIL,
-        payload: err.response.data.msg,
-      })
+      // dispatch({
+      //   type: LOAD_USER_FAIL,
+      //   payload: err.response.data.msg,
+      // })
+      alert("ERROR GET USERS")
     );
 };
 
