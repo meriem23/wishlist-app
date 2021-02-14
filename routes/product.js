@@ -2,9 +2,21 @@ const express = require("express");
 const router = express.Router();
 const Product = require("../models/productSchema");
 const authMiddleware = require("../middlewares/authMiddleware");
+const multer = require("multer");
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./uploads");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+var upload = multer({ storage: storage });
 
 /* Post Product */
-router.post("/newProduct", (req, res) => {
+router.post("/newProduct", upload.single("productImg"), (req, res) => {
   const newProduct = new Product(req.body);
   newProduct
     .save()

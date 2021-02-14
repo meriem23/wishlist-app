@@ -10,7 +10,7 @@ import {
 
 export const getProducts = () => (dispatch) => {
   axios
-    .get("http://localhost:5000/product")
+    .get(`${process.env.REACT_APP_API_URL}product`)
     .then((res) => {
       dispatch({
         type: GET_PRODUCTS,
