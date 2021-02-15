@@ -2,7 +2,6 @@ import axios from "axios";
 import {
   REGISTER_FAIL,
   REGISTER_SUCCESS,
-  LOAD_USER_FAIL,
   LOAD_USER_SUCCESS,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
@@ -12,7 +11,7 @@ import setToken from "../setToken";
 
 export const registerUser = (user) => (dispatch) => {
   axios
-    .post("http://localhost:5000/register", user)
+    .post("http://localhost:5000/api/register", user)
     .then((res) =>
       dispatch({
         type: REGISTER_SUCCESS,
@@ -30,7 +29,7 @@ export const registerUser = (user) => (dispatch) => {
 export const loadUser = () => (dispatch) => {
   setToken();
   axios
-    .get("http://localhost:5000/login/loadUser")
+    .get("http://localhost:5000/api/login")
     .then((res) =>
       dispatch({
         type: LOAD_USER_SUCCESS,
@@ -48,7 +47,7 @@ export const loadUser = () => (dispatch) => {
 
 export const loginUser = (data) => (dispatch) => {
   axios
-    .post("http://localhost:5000/login/loginUser", data)
+    .post("http://localhost:5000/api/login", data)
     .then((res) =>
       dispatch({
         type: LOGIN_SUCCESS,

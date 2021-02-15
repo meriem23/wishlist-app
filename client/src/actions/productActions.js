@@ -5,31 +5,32 @@ import {
   DELETE_PRODUCTS,
   EDIT_PRODUCTS,
 } from "./types";
+import setToken from "../setToken";
 
 /* Get all products*/
 export const getProducts = () => (dispatch) => {
-  axios
-    .get(`${process.env.REACT_APP_API_URL}product`)
-    .then((res) => {
-      dispatch({
-        type: GET_PRODUCTS,
-        payload: res.data,
-      });
-    })
-    .catch((err) => {
-      alert("ERROR GET PRODUCTS");
+  setToken();
+  axios.get(`${process.env.REACT_APP_API_URL}product`).then((res) => {
+    dispatch({
+      type: GET_PRODUCTS,
+      payload: res.data,
     });
+  });
 };
 
 /* Add a new product */
 export const addProduct = (newProduct) => async (dispatch) => {
-  const msg = await axios.post(
-    `${process.env.REACT_APP_API_URL}product/newProduct`,
-    newProduct
+  setToken();
+  const config = {
+    "Content-Type": "form-data",
+  };
+  await axios.post(
+    `${process.env.REACT_APP_API_URL}product`,
+    newProduct,
+    config
   );
   dispatch({
     type: ADD_PRODUCT,
-    payload: msg,
   });
   dispatch(getProducts());
 };

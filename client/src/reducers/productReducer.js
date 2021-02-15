@@ -1,7 +1,8 @@
-import { GET_PRODUCTS } from "../actions/types";
+import { GET_PRODUCTS, ADD_PRODUCT } from "../actions/types";
 let initState = {
   products: [],
   errors: null,
+  saved: null,
 };
 
 const productReducer = (state = initState, { type, payload }) => {
@@ -12,6 +13,8 @@ const productReducer = (state = initState, { type, payload }) => {
         products: payload,
         errors: null,
       };
+    case ADD_PRODUCT:
+      return { ...state, products: [payload, ...state.products] };
     default:
       return state;
   }

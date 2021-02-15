@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
-const User = require("../models/userSchema");
+const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-
 
 //Register a new user
 router.post(
@@ -23,35 +22,54 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    User.findOne({ email: req.body.email }).then((users) => {
-      if (users) {
-        return res
-          .status(400)
-          .send({ errors: [{ msg: "The user already exists in the DB." }] });
-      }
-      let newUser = new User(req.body);
-      bcrypt.genSalt(10, (err, salt) => {
-        if (err) {
-          throw err;
+    const { fname, lname, email, password } = req.body;
+    User.findOne({ email })
+      .then((user) => {
+        if (user) {
+          return res
+            .status(400)
+            .send({ errors: [{ msg: "The user already exists in the DB." }] });
+        } else {
+          user = new User({
+            fname,
+            lname,
+            email,
+            password,
+          });
         }
-        bcrypt.hash(req.body.password, salt, (err, hashPwd) => {
+        bcrypt.genSalt(10, (err, salt) => {
           if (err) {
             throw err;
           }
-          newUser.password = hashPwd;
-          newUser.save();
-          let payload = {
-            userId: newUser._id,
-          };
-          jwt.sign(payload, process.env.SECRET_KEY, (err, token) => {
+          bcrypt.hash(user.password, salt, (err, hashPwd) => {
             if (err) {
               throw err;
             }
-            res.send({ token });
+            user.password = hashPwd;
+            user.save();
+            let payload = {
+              user: {
+                id: user.id,
+              },
+            };
+            jwt.sign(
+              payload,
+              process.env.SECRET_KEY,
+              { expiresIn: 3600000 },
+              (err, token) => {
+                if (err) {
+                  throw err;
+                }
+                res.send({ token });
+              }
+            );
           });
         });
+      })
+      .catch((err) => {
+        console.error(err.message);
+        res.status(500).send("Server error");
       });
-    });
   }
 );
 

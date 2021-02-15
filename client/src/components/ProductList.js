@@ -12,10 +12,9 @@ const ProductList = () => {
     <div>
       {products.map((prod) => (
         <div>
-          <p>{prod.prodDesc}</p>
-          <p>{prod.prodName}</p>
-          <p>{prod.prodStatus}</p>
-          <p>{prod.addProdDate}</p>
+          <p>{prod.pDesc}</p>
+          <p>{prod.pName}</p>
+          <p>{prod.pStatus}</p>
           <img src={prod.pImage} alt={prod.prodDesc} />
         </div>
       ))}

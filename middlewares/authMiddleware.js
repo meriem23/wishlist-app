@@ -1,16 +1,16 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config({ path: "../.env" });
 const authMiddleware = (req, res, next) => {
-  let token = req.header("auth-token");
+  let token = req.header("x-auth-token");
 
   if (!token) {
     return res.status(401).json({ msg: "You are not an authorized user" });
   }
   jwt.verify(token, process.env.SECRET_KEY, (err, payload) => {
     if (err) {
-      throw err;
+      res.status(401).json({ msg: "Token not valid" });
     }
-    req.userId = payload.userId;
+    req.user = payload.user;
     next();
   });
 };
