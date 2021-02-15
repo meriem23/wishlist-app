@@ -29,7 +29,12 @@ const Login = () => {
   return (
     <div className="formStyle">
       <div className="formText">
-        <Image width={35} src="./wishlist.png" />
+        <Image
+          width={35}
+          preview={false}
+          src="./wishlist.png"
+          alt="wishlist logo"
+        />
         <Title level={3}>Sign In</Title>
       </div>
       <Form
