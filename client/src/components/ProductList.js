@@ -16,7 +16,7 @@ const ProductList = () => {
           <p>{prod.prodName}</p>
           <p>{prod.prodStatus}</p>
           <p>{prod.addProdDate}</p>
-          <img src={prod.prodImage} alt={prod.prodDesc} />
+          <img src={prod.pImage} alt={prod.prodDesc} />
         </div>
       ))}
     </div>

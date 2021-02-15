@@ -1,18 +1,26 @@
 import { useState } from "react";
-import { Form, Input, Button, Typography, Image } from "antd";
-import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
+import { Form, Input, Button, Typography, Image, Upload } from "antd";
+import {
+  MoneyCollectOutlined,
+  FileImageOutlined,
+  FileTextOutlined,
+  UploadOutlined,
+} from "@ant-design/icons";
 
 const ProductAdd = () => {
   const [prod, setProd] = useState({
     pName: "",
     pDesc: "",
     pPrice: 0,
-    pImage: "",
     pStatus: "",
   });
+  const [file, setFile] = useState(null);
   const { Title } = Typography;
   const handleChange = (e) => {
     setProd({ ...prod, [e.target.name]: e.target.value });
+  };
+  const uploadImage = (e) => {
+    setFile(e.target.files[0]);
   };
   return (
     <div className="formStyle">
@@ -36,7 +44,6 @@ const ProductAdd = () => {
       >
         <Form.Item>
           <Input
-            prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Product Name"
             name="pName"
             onChange={handleChange}
@@ -44,7 +51,7 @@ const ProductAdd = () => {
         </Form.Item>
         <Form.Item>
           <Input
-            prefix={<MailOutlined className="site-form-item-icon" />}
+            prefix={<MoneyCollectOutlined />}
             placeholder="Product Price"
             name="pPrice"
             onChange={handleChange}
@@ -52,7 +59,7 @@ const ProductAdd = () => {
         </Form.Item>
         <Form.Item>
           <Input
-            prefix={<UserOutlined className="site-form-item-icon" />}
+            prefix={<FileTextOutlined />}
             placeholder="Product Description"
             name="pDesc"
             onChange={handleChange}
@@ -60,10 +67,11 @@ const ProductAdd = () => {
         </Form.Item>
         <Form.Item>
           <Input
-            prefix={<MailOutlined className="site-form-item-icon" />}
+            prefix={<FileImageOutlined />}
             placeholder="Product Image"
             name="pImage"
-            onChange={handleChange}
+            type="file"
+            onChange={uploadImage}
           />
         </Form.Item>
         <Form.Item>
