@@ -1,13 +1,12 @@
 import axios from "axios";
 import {
   GET_PRODUCTS,
+  ADD_PRODUCT,
   DELETE_PRODUCTS,
   EDIT_PRODUCTS,
-  LOAD_PRODUCTS_FAIL,
 } from "./types";
 
 /* Get all products*/
-
 export const getProducts = () => (dispatch) => {
   axios
     .get(`${process.env.REACT_APP_API_URL}product`)
@@ -18,6 +17,19 @@ export const getProducts = () => (dispatch) => {
       });
     })
     .catch((err) => {
-      alert("ERROR GET USERS");
+      alert("ERROR GET PRODUCTS");
     });
+};
+
+/* Add a new product */
+export const addProduct = (newProduct) => async (dispatch) => {
+  const msg = await axios.post(
+    `${process.env.REACT_APP_API_URL}product/newProduct`,
+    newProduct
+  );
+  dispatch({
+    type: ADD_PRODUCT,
+    payload: msg,
+  });
+  dispatch(getProducts());
 };

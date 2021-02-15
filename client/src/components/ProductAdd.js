@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 import { Form, Input, Button, Typography, Image, Upload } from "antd";
 import {
   MoneyCollectOutlined,
@@ -6,6 +8,7 @@ import {
   FileTextOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
+import { addProduct } from "../actions/productActions";
 
 const ProductAdd = () => {
   const [prod, setProd] = useState({
@@ -16,11 +19,16 @@ const ProductAdd = () => {
   });
   const [file, setFile] = useState(null);
   const { Title } = Typography;
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     setProd({ ...prod, [e.target.name]: e.target.value });
   };
   const uploadImage = (e) => {
     setFile(e.target.files[0]);
+  };
+  const addNewProduct = (e) => {
+    e.preventDefault();
+    dispatch(addProduct(prod));
   };
   return (
     <div className="formStyle">
@@ -75,7 +83,7 @@ const ProductAdd = () => {
           />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" onClick={addNewProduct}>
             Save
           </Button>
         </Form.Item>

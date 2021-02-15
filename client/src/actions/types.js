@@ -10,6 +10,6 @@ export const LOAD_USER_FAIL = "LOAD_USER_FAIL";
 export const LOGOUT = "LOGOUT";
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
-export const LOAD_PRODUCTS_FAIL = "LOAD_PRODUCTS_FAIL";
+export const ADD_PRODUCT = "ADD_PRODUCT";
 export const DELETE_PRODUCTS = "DELETE_PRODUCTS";
 export const EDIT_PRODUCTS = "EDIT_PRODUCTS";

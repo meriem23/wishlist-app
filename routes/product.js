@@ -17,24 +17,24 @@ var upload = multer({ storage: storage });
 
 /* Post Product */
 router.post("/newProduct", upload.single("pImg"), (req, res) => {
-  let path =
-    req.protocol +
-    "://" +
-    req.hostname +
-    ":" +
-    5000 +
-    "/uploads/" +
-    req.file.filename;
-  let newImage = new Product({ pImage: path });
-  newImage
-    .save()
-    .then((img) => res.status(201).send(img))
-    .catch((err) => res.status(500).send({ msg: "Server error" }));
-  // const newProduct = new Product(req.body);
-  // newProduct
+  // let path =
+  //   req.protocol +
+  //   "://" +
+  //   req.hostname +
+  //   ":" +
+  //   5000 +
+  //   "/uploads/" +
+  //   req.file.filename;
+  // let newImage = new Product({ pImage: path });
+  // newImage
   //   .save()
-  //   .then((product) => res.status(201).send(product))
-  //   .catch((err) => res.status(500).send({ msg: "Server error." }));
+  //   .then((img) => res.status(201).send(img))
+  //   .catch((err) => res.status(500).send({ msg: "Server error" }));
+  const newProduct = new Product(req.body);
+  newProduct
+    .save()
+    .then((product) => res.status(201).send(product))
+    .catch((err) => res.status(500).send({ msg: "Server error." }));
 });
 
 /* Get all products*/
