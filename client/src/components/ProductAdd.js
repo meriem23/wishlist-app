@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { Form, Input, Button, Typography, Image, Upload } from "antd";
+import { Form, Input, Button, Typography, Image, Select, Radio } from "antd";
 import {
   MoneyCollectOutlined,
   FileImageOutlined,
@@ -15,21 +15,31 @@ const ProductAdd = () => {
     pName: "",
     pDesc: "",
     pPrice: 0,
+  });
+  const [status, setStatus] = useState({
     pStatus: "",
   });
   const [file, setFile] = useState(null);
   const { Title } = Typography;
+
   const dispatch = useDispatch();
   const handleChange = (e) => {
     setProd({ ...prod, [e.target.name]: e.target.value });
   };
+  const statusChange = (e) => {
+    setStatus(e.target.value);
+  };
   const uploadImage = (e) => {
     setFile(e.target.files[0]);
   };
+  const info = { status, ...prod };
+
   const addNewProduct = (e) => {
     e.preventDefault();
     dispatch(addProduct(prod));
   };
+
+  // const newProdAdd = (prod) => dispatch(addProduct(prod));
   return (
     <div className="formStyle">
       <div className="formText">
@@ -73,6 +83,20 @@ const ProductAdd = () => {
             onChange={handleChange}
           />
         </Form.Item>
+        <Radio.Group onChange={statusChange} value={status}>
+          <Radio value="to_buy">To buy</Radio>
+          <Radio value="bought">Bought</Radio>
+        </Radio.Group>
+        {/* <Select
+          showSearch
+          style={{ width: 200 }}
+          onChange={statusChange}
+          value={status}
+          placeholder="Select a status"
+        >
+          <Option value="to_buy">To Buy</Option>
+          <Option value="bought">bought</Option>
+        </Select> */}
         <Form.Item>
           <Input
             prefix={<FileImageOutlined />}

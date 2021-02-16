@@ -19,18 +19,17 @@ export const getProducts = () => (dispatch) => {
 };
 
 /* Add a new product */
-export const addProduct = (newProduct) => async (dispatch) => {
+export const addProduct = (newProduct) => (dispatch) => {
   setToken();
-  const config = {
-    "Content-Type": "form-data",
-  };
-  await axios.post(
-    `${process.env.REACT_APP_API_URL}product`,
-    newProduct,
-    config
+  // const config = {
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // };
+  axios.post("http://localhost:5000/api/product", newProduct).then((res) =>
+    dispatch({
+      type: ADD_PRODUCT,
+      payload: res.data,
+    })
   );
-  dispatch({
-    type: ADD_PRODUCT,
-  });
-  dispatch(getProducts());
 };

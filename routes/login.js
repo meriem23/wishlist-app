@@ -47,6 +47,8 @@ router.post(
           if (error) {
             console.log(err.message);
           } else if (!isMatch) {
+            return res.status(400).json({ msg: "Wrong Password" });
+          } else {
             const payload = {
               user: {
                 id: user.id,
@@ -61,8 +63,6 @@ router.post(
                 res.json({ token });
               }
             );
-          } else {
-            return res.status(400).json({ msg: "Wrong Password" });
           }
         });
       })
@@ -73,15 +73,3 @@ router.post(
 );
 
 module.exports = router;
-// else if (!isMatch) {
-//   return res.status(400).json({ errors: [{ msg: "Wrong password." }] });
-// } else {
-//   let payload = {
-//     user: user._id,
-//   };
-//   jwt.sign(payload, process.env.SECRET_KEY, (err, token) => {
-//     if (err) {
-//       throw err;
-//     }
-//     res.send({ token });
-//   });
