@@ -34,50 +34,46 @@ router.post(
   }
 );
 
-// /* Delete a product*/
-// router.delete("/:id", authMiddleware, (req, res) => {
-//   Product.findById(req.params.id)
-//     .then((product) => {
-//       if (!product) {
-//         return res.status(404).json({ msg: "Product not found" });
-//       } else if (product.user.toString() !== req.user.id) {
-//         res.status(401).json({ msg: "Not authorized" });
-//       } else {
-//         Product.findByIdAndDelete(req.params.id, (err, data) => {
-//           res.json({ msg: "Product deleted" });
-//         });
-//       }
-//     })
-//     .catch((err) => {
-//       res.status(500).send("Server error");
-//     });
-// });
+/* Delete a wishlist*/
+router.delete("/:id", authMiddleware, (req, res) => {
+  Wishlist.findById(req.params.id)
+    .then((wishlist) => {
+      if (!wishlist) {
+        return res.status(404).json({ msg: "Wishlist not found" });
+      } else if (wishlist.user.toString() !== req.user.id) {
+        res.status(401).json({ msg: "Not authorized" });
+      } else {
+        Wishlist.findByIdAndDelete(req.params.id, (err, data) => {
+          res.json({ msg: "Wishlist deleted" });
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send("Server error");
+    });
+});
 
-// /*Edit a product*/
-// router.put("/:id", authMiddleware, (req, res) => {
-//   const { pName, pDesc, pPrice, pImage, pStatus } = req.body;
-//   let productFields = {};
-//   if (pName) musicFields.pName = pName;
-//   if (pDesc) musicFields.pDesc = pDesc;
-//   if (pPrice) musicFields.pPrice = pPrice;
-//   if (pImage) musicFields.pImage = pImage;
-//   if (pStatus) musicFields.pStatus = pStatus;
+/*Edit a wishlist*/
+router.put("/:id", authMiddleware, (req, res) => {
+  const { wishlist } = req.body;
+  let wishlistField = {};
+  if (wishlist) wishlistField.wishlist = wishlist;
 
-//   Product.findById(req.params.id).then((product) => {
-//     if (!product) {
-//       return res.status(404).json({ msg: "Product not found" });
-//     } else if (product.user.toString() !== req.user.id) {
-//       res.status(401).json({ msg: "Not authorized" });
-//     } else {
-//       Product.findByIdAndUpdate(
-//         req.params.id,
-//         { $set: productFields },
-//         (err, data) => {
-//           res.json({ msg: "Product updated" });
-//         }
-//       );
-//     }
-//   });
-// });
+  Wishlist.findById(req.params.id).then((wishlist) => {
+    if (!wishlist) {
+      return res.status(404).json({ msg: "Wishlist not found" });
+    } else if (wishlist.user.toString() !== req.user.id) {
+      res.status(401).json({ msg: "Not authorized" });
+    } else {
+      Wishlist.findByIdAndUpdate(
+        req.params.id,
+        { $set: wishlistField },
+        (err, data) => {
+          res.json({ msg: "Wishlist updated" });
+        }
+      );
+    }
+  });
+});
 
 module.exports = router;

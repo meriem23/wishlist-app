@@ -69,11 +69,11 @@ router.delete("/:id", authMiddleware, (req, res) => {
 router.put("/:id", authMiddleware, (req, res) => {
   const { pName, pDesc, pPrice, pImage, pStatus } = req.body;
   let productFields = {};
-  if (pName) musicFields.pName = pName;
-  if (pDesc) musicFields.pDesc = pDesc;
-  if (pPrice) musicFields.pPrice = pPrice;
-  if (pImage) musicFields.pImage = pImage;
-  if (pStatus) musicFields.pStatus = pStatus;
+  if (pName) productFields.pName = pName;
+  if (pDesc) productFields.pDesc = pDesc;
+  if (pPrice) productFields.pPrice = pPrice;
+  //if (pImage) productFields.pImage = pImage;
+  if (pStatus) productFields.pStatus = pStatus;
 
   Product.findById(req.params.id).then((product) => {
     if (!product) {

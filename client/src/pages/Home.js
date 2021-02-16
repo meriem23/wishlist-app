@@ -12,10 +12,10 @@ const Home = () => {
       {user && (
         <div>
           <UserAvatar />
-          {/* <WishlistModal /> */}
-          {/* <Wishlist /> */}
-          <ProductAdd />
-          <ProductList />
+          <WishlistModal />
+          <Wishlist />
+          {/* <ProductAdd />
+          <ProductList /> */}
         </div>
       )}
     </div>
