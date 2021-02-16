@@ -19,9 +19,7 @@ const ProductAdd = () => {
   const [status, setStatus] = useState({
     pStatus: "",
   });
-  const [file, setFile] = useState(null);
   const { Title } = Typography;
-
   const dispatch = useDispatch();
   const handleChange = (e) => {
     setProd({ ...prod, [e.target.name]: e.target.value });
@@ -29,17 +27,13 @@ const ProductAdd = () => {
   const statusChange = (e) => {
     setStatus(e.target.value);
   };
-  const uploadImage = (e) => {
-    setFile(e.target.files[0]);
-  };
   const info = { status, ...prod };
-
+  console.log(info);
   const addNewProduct = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     dispatch(addProduct(prod));
   };
 
-  // const newProdAdd = (prod) => dispatch(addProduct(prod));
   return (
     <div className="formStyle">
       <div className="formText">
@@ -97,7 +91,7 @@ const ProductAdd = () => {
           <Option value="to_buy">To Buy</Option>
           <Option value="bought">bought</Option>
         </Select> */}
-        <Form.Item>
+        {/* <Form.Item>
           <Input
             prefix={<FileImageOutlined />}
             placeholder="Product Image"
@@ -105,7 +99,7 @@ const ProductAdd = () => {
             type="file"
             onChange={uploadImage}
           />
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item>
           <Button type="primary" onClick={addNewProduct}>
             Save

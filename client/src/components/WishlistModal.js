@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Modal, Button, Form, Input } from "antd";
 import { HeartOutlined } from "@ant-design/icons";
+import { addWishlist } from "../actions/wishlistActions";
 
 const WishlistModal = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [wishlist, setWishlist] = useState({ wishlist: "" });
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     setWishlist({ ...wishlist, [e.target.name]: e.target.value });
   };
@@ -13,6 +16,7 @@ const WishlistModal = () => {
   };
   const handleOk = () => {
     setIsModalVisible(false);
+    dispatch(addWishlist(wishlist));
   };
   const handleCancel = () => {
     setIsModalVisible(false);

@@ -10,8 +10,8 @@ const ProductList = () => {
   const { products } = useSelector((state) => state.product);
   return (
     <div>
-      {products.map((prod) => (
-        <div>
+      {products.map((prod, i) => (
+        <div key={i}>
           <p>{prod.pDesc}</p>
           <p>{prod.pName}</p>
           <p>{prod.pStatus}</p>
