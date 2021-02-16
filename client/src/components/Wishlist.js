@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getWishlists } from "../actions/wishlistActions";
+import { getWishlists, deleteWishlist } from "../actions/wishlistActions";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
 
@@ -9,17 +9,23 @@ const ProductList = () => {
   useEffect(() => {
     dispatch(getWishlists());
   }, []);
+  const deleteOneWishlist = (id) => {
+    dispatch(deleteWishlist(id));
+  };
   const { wishlists } = useSelector((state) => state.wish);
   const { Text } = Typography;
   return (
     <div>
-      <Text>Ant Design</Text>{" "}
-      <DeleteOutlined
-        onClick={() => console.log("hello")}
-        style={{ color: "red", fontSize: "20px" }}
-      />
       {wishlists.map((wish, i) => (
-        <p key={i}>{wish.wishlist}</p>
+        <div key={i}>
+          <Text>{wish.wishlist}</Text>
+          <DeleteOutlined
+            onClick={() => {
+              deleteOneWishlist(wish._id);
+            }}
+            style={{ color: "red", fontSize: "20px" }}
+          />
+        </div>
       ))}
     </div>
   );

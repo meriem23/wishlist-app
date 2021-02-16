@@ -1,4 +1,4 @@
-import { GET_WISHLISTS } from "../actions/types";
+import { DELETE_WISHLISTS, GET_WISHLISTS } from "../actions/types";
 let initState = {
   wishlists: [],
   errors: null,
@@ -12,6 +12,11 @@ const wishlistReducer = (state = initState, { type, payload }) => {
         ...state,
         wishlists: payload,
         errors: null,
+      };
+    case DELETE_WISHLISTS:
+      return {
+        ...state,
+        wishlists: state.wishlists.filter((el) => el.i_d !== payload),
       };
     default:
       return state;
