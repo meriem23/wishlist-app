@@ -38,7 +38,6 @@ const Login = () => {
         <Title level={3}>Sign In</Title>
       </div>
       <Form
-        name="basic"
         initialValues={{
           remember: true,
         }}

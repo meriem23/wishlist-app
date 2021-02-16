@@ -18,12 +18,13 @@ router.get("/", authMiddleware, (req, res) => {
 router.post(
   "/",
   [
+    //upload.single("Image"),
     authMiddleware,
     [
-      body("pName", "Product Name is required").notEmpty(),
-      body("pDesc", "Product Description is required").notEmpty(),
-      body("pPrice", "Product Price is required").notEmpty(),
-      body("pStatus", "Product Status is required").notEmpty(),
+      body("Name", "Product Name is required").notEmpty(),
+      body("Description", "Product Description is required").notEmpty(),
+      body("Price", "Product Price is required").notEmpty(),
+      body("Status", "Product Status is required").notEmpty(),
     ],
   ],
   (req, res) => {
@@ -31,12 +32,14 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { pName, pDesc, pPrice, pStatus } = req.body;
+    //const img = req.file.filename;
+    const { Name, Description, Price, Status } = req.body;
     const newProduct = new Product({
-      pName,
-      pDesc,
-      pPrice,
-      pStatus,
+      Name,
+      Description,
+      Price,
+      Status,
+      //Image: img,
       user: req.user.id,
     });
     newProduct
@@ -67,13 +70,13 @@ router.delete("/:id", authMiddleware, (req, res) => {
 
 /*Edit a product*/
 router.put("/:id", authMiddleware, (req, res) => {
-  const { pName, pDesc, pPrice, pImage, pStatus } = req.body;
+  const { Name, Description, Price, Image, Status } = req.body;
   let productFields = {};
-  if (pName) productFields.pName = pName;
-  if (pDesc) productFields.pDesc = pDesc;
-  if (pPrice) productFields.pPrice = pPrice;
-  //if (pImage) productFields.pImage = pImage;
-  if (pStatus) productFields.pStatus = pStatus;
+  if (Name) productFields.Name = Name;
+  if (Description) productFields.Description = Description;
+  if (Price) productFields.Price = Price;
+  if (Image) productFields.Image = Image;
+  if (Status) productFields.Status = Status;
 
   Product.findById(req.params.id).then((product) => {
     if (!product) {

@@ -1,10 +1,5 @@
 import axios from "axios";
-import {
-  GET_PRODUCTS,
-  ADD_PRODUCT,
-  DELETE_PRODUCTS,
-  EDIT_PRODUCTS,
-} from "./types";
+import { GET_PRODUCTS, DELETE_PRODUCT, EDIT_PRODUCTS } from "./types";
 import setToken from "../setToken";
 
 /* Get all products*/
@@ -27,4 +22,13 @@ export const addProduct = (newProduct) => (dispatch) => {
     .catch((err) => {
       alert("Error adding new product");
     });
+};
+/* Delete a product */
+export const deleteProduct = (id) => async (dispatch) => {
+  await axios.delete(`${process.env.REACT_APP_API_URL}product/${id}`);
+  dispatch({
+    type: DELETE_PRODUCT,
+    payload: id,
+  });
+  dispatch(getProducts());
 };

@@ -3,15 +3,15 @@ const mongoose = require("mongoose");
 const ProductSchema = mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
   wishlist: { type: mongoose.Schema.Types.ObjectId, ref: "wishlists" },
-  pName: String,
-  pDesc: String,
-  pPrice: Number,
-  pImage: {
+  Name: String,
+  Description: String,
+  Price: Number,
+  Image: {
     type: String,
     default:
       "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
   },
-  pStatus: String,
+  Status: String,
   date: { type: Date, default: Date.now },
 });
 

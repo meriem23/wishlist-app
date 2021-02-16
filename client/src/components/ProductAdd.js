@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import axios from "axios";
-import { Form, Input, Button, Typography, Image, Select, Radio } from "antd";
+import { Form, Input, Button, Typography, Image } from "antd";
 import {
   MoneyCollectOutlined,
   FileImageOutlined,
@@ -11,29 +10,23 @@ import {
 import { addProduct } from "../actions/productActions";
 
 const ProductAdd = () => {
-  const [prod, setProd] = useState({
-    pName: "",
-    pDesc: "",
-    pPrice: 0,
-  });
-  const [status, setStatus] = useState({
-    pStatus: "",
+  const [product, setProduct] = useState({
+    Name: "",
+    Description: "",
+    Price: 0,
+    Status: "",
   });
   const { Title } = Typography;
+  const [form] = Form.useForm();
   const dispatch = useDispatch();
   const handleChange = (e) => {
-    setProd({ ...prod, [e.target.name]: e.target.value });
+    setProduct({ ...product, [e.target.name]: e.target.value });
   };
-  const statusChange = (e) => {
-    setStatus(e.target.value);
-  };
-  const info = { status, ...prod };
-  console.log(info);
   const addNewProduct = (e) => {
-    // e.preventDefault();
-    dispatch(addProduct(prod));
+    e.preventDefault();
+    dispatch(addProduct(product));
+    form.resetFields();
   };
-
   return (
     <div className="formStyle">
       <div className="formText">
@@ -46,6 +39,7 @@ const ProductAdd = () => {
         <Title level={3}>Add Product</Title>
       </div>
       <Form
+        form={form}
         style={{
           width: 310,
           display: "flex",
@@ -57,7 +51,7 @@ const ProductAdd = () => {
         <Form.Item>
           <Input
             placeholder="Product Name"
-            name="pName"
+            name="Name"
             onChange={handleChange}
           />
         </Form.Item>
@@ -65,7 +59,7 @@ const ProductAdd = () => {
           <Input
             prefix={<MoneyCollectOutlined />}
             placeholder="Product Price"
-            name="pPrice"
+            name="Price"
             onChange={handleChange}
           />
         </Form.Item>
@@ -73,33 +67,18 @@ const ProductAdd = () => {
           <Input
             prefix={<FileTextOutlined />}
             placeholder="Product Description"
-            name="pDesc"
+            name="Description"
             onChange={handleChange}
           />
         </Form.Item>
-        <Radio.Group onChange={statusChange} value={status}>
-          <Radio value="to_buy">To buy</Radio>
-          <Radio value="bought">Bought</Radio>
-        </Radio.Group>
-        {/* <Select
-          showSearch
-          style={{ width: 200 }}
-          onChange={statusChange}
-          value={status}
-          placeholder="Select a status"
-        >
-          <Option value="to_buy">To Buy</Option>
-          <Option value="bought">bought</Option>
-        </Select> */}
-        {/* <Form.Item>
+        <Form.Item>
           <Input
-            prefix={<FileImageOutlined />}
-            placeholder="Product Image"
-            name="pImage"
-            type="file"
-            onChange={uploadImage}
+            prefix={<FileTextOutlined />}
+            placeholder="Product Status"
+            name="Status"
+            onChange={handleChange}
           />
-        </Form.Item> */}
+        </Form.Item>
         <Form.Item>
           <Button type="primary" onClick={addNewProduct}>
             Save

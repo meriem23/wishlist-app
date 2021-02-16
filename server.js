@@ -1,8 +1,9 @@
 const express = require("express");
-var cors = require("cors");
+const cors = require("cors");
+const path = require("path");
 const connectDB = require("./config/connectDB");
 const app = express();
-//const directory = path.join(__dirname, "/uploads");
+const directory = path.join(__dirname, "/uploads");
 
 //Requiring variables
 require("dotenv").config();
@@ -11,7 +12,7 @@ connectDB();
 // Define middlewares
 app.use(express.json());
 app.use(cors());
-app.use("/uploads", express.static(__dirname + "/uploads"));
+app.use("/uploads", express.static(directory));
 // Define routes
 app.use("/api/register", require("./routes/register"));
 app.use("/api/login", require("./routes/login"));

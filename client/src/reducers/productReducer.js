@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, ADD_PRODUCT } from "../actions/types";
+import { GET_PRODUCTS, ADD_PRODUCT, DELETE_PRODUCT } from "../actions/types";
 let initState = {
   products: [],
   errors: null,
@@ -14,7 +14,13 @@ const productReducer = (state = initState, { type, payload }) => {
         errors: null,
       };
     case ADD_PRODUCT:
-      return { ...state, products: [payload, ...state.products] };
+      return { ...state, products: [payload, ...state.products], errors: null };
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        products: state.products.filter((el) => el.i_d !== payload),
+        errors: null,
+      };
     default:
       return state;
   }

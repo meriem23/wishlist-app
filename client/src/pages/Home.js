@@ -14,8 +14,8 @@ const Home = () => {
           <UserAvatar />
           <WishlistModal />
           <Wishlist />
-          {/* <ProductAdd />
-          <ProductList /> */}
+          <ProductAdd />
+          <ProductList />
         </div>
       )}
     </div>

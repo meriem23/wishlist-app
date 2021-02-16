@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DELETE_WISHLISTS, GET_WISHLISTS } from "./types";
+import { DELETE_WISHLIST, GET_WISHLISTS } from "./types";
 import setToken from "../setToken";
 
 /* Get all wishlists*/
@@ -28,7 +28,7 @@ export const addWishlist = (newWish) => (dispatch) => {
 export const deleteWishlist = (id) => async (dispatch) => {
   await axios.delete(`${process.env.REACT_APP_API_URL}wishlist/${id}`);
   dispatch({
-    type: DELETE_WISHLISTS,
+    type: DELETE_WISHLIST,
     payload: id,
   });
   dispatch(getWishlists());

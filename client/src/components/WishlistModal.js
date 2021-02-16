@@ -7,6 +7,7 @@ import { addWishlist } from "../actions/wishlistActions";
 const WishlistModal = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [wishlist, setWishlist] = useState({ wishlist: "" });
+  const [form] = Form.useForm();
   const dispatch = useDispatch();
   const handleChange = (e) => {
     setWishlist({ ...wishlist, [e.target.name]: e.target.value });
@@ -17,6 +18,7 @@ const WishlistModal = () => {
   const handleOk = () => {
     setIsModalVisible(false);
     dispatch(addWishlist(wishlist));
+    form.resetFields();
   };
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -35,6 +37,7 @@ const WishlistModal = () => {
         width="290px"
       >
         <Form
+          form={form}
           name="basic"
           initialValues={{
             remember: true,

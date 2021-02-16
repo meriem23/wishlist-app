@@ -28,7 +28,6 @@ const Register = () => {
     dispatch(registerUser(user));
   };
   const { Title } = Typography;
-
   return (
     <div className="formStyle">
       <div className="formText">
@@ -41,6 +40,9 @@ const Register = () => {
         <Title level={3}>Register</Title>
       </div>
       <Form
+        initialValues={{
+          remember: true,
+        }}
         style={{
           width: 310,
           display: "flex",
@@ -57,7 +59,15 @@ const Register = () => {
             onChange={handleChange}
           />
         </Form.Item>
-        <Form.Item>
+        <Form.Item
+          rules={[
+            {
+              required: true,
+              message: "Please enter your last name...",
+              type: "string",
+            },
+          ]}
+        >
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Your Last Name"
