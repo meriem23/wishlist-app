@@ -81,7 +81,7 @@ const ProductAdd = () => {
         </Form.Item>
         <Form.Item>
           <Button type="primary" onClick={addNewProduct}>
-            Save
+            Add
           </Button>
         </Form.Item>
       </Form>

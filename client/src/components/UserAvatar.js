@@ -15,16 +15,14 @@ const UserAvatar = () => {
     </Menu>
   );
   return (
-    <div>
+    <div className="avatarHover">
+      <Avatar
+        style={{ backgroundColor: "#4bb2f2" }}
+        size={45}
+        icon={`${user.lname.slice(0, 1)} ${user.fname.slice(0, 1)}`}
+      />
       <Dropdown overlay={menu}>
-        <Button className="btn">
-          <Avatar
-            style={{ backgroundColor: "#4bb2f2" }}
-            size={50}
-            icon={`${user.lname.slice(0, 1)} ${user.fname.slice(0, 1)}`}
-          />
-          <DownOutlined />
-        </Button>
+        <DownOutlined style={{ color: "#4bb2f2" }} />
       </Dropdown>
     </div>
   );
