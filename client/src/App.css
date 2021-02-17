@@ -8,7 +8,7 @@
 .formStyle {
   border: 2px solid #4bb2f2;
   width: fit-content;
-  /* transform: translate(150%, 30%); */
+  transform: translate(100%, 0%);
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -43,3 +43,18 @@ button {
   width: 100%;
   height: fit-content;
 } */
+.textStyle {
+  color: #4bb2f2;
+  font-weight: 400;
+}
+.listStyle {
+  font-weight: 500;
+  color: #4bb2f2;
+}
+.add_btn {
+  width: 90%;
+  margin: 5px;
+  height: 40px;
+  border: 1px solid #4bb2f2;
+  /* color: #4bb2f2; */
+}

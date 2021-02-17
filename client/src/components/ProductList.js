@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../actions/productActions";
 import ProductCard from "./ProductCard";
 
-const ProductList = () => {
+const ProductList = ({ content, type }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProducts());

@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Modal, Button, Form, Input } from "antd";
-import { HeartOutlined } from "@ant-design/icons";
+import { Modal, Form, Input, Typography } from "antd";
+import { HeartOutlined, PlusOutlined } from "@ant-design/icons";
 import { addWishlist } from "../actions/wishlistActions";
 
 const WishlistModal = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [wishlist, setWishlist] = useState({ wishlist: "" });
+  const { Text } = Typography;
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const handleChange = (e) => {
@@ -23,11 +24,15 @@ const WishlistModal = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+  //
   return (
     <div>
-      <Button type="primary" onClick={showModal}>
-        Add a Wishlist
-      </Button>
+      <Text onClick={showModal} className="textStyle">
+        <PlusOutlined
+          style={{ color: "#4bb2f2", marginRight: 20, fontSize: 15 }}
+        />
+        Add Wishlist
+      </Text>
       <Modal
         title="Wishlist Name"
         visible={isModalVisible}

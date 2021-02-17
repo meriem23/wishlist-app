@@ -4,8 +4,7 @@ import { deleteProduct } from "../actions/productActions";
 import { Card, Typography } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
-const ProductCard = ({ product }) => {
-  const { Meta } = Card;
+const ProductCard = ({ product, type, content }) => {
   const { Title, Text } = Typography;
   const dispatch = useDispatch();
   const deleteOneProduct = (id) => {

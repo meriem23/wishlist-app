@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Row, Col, Tabs, Drawer } from "antd";
+import { Row, Col, Tabs } from "antd";
 import { HeartOutlined } from "@ant-design/icons";
 import { loadUser } from "../actions/authActions";
 import UserAvatar from "../components/UserAvatar";
@@ -8,6 +8,8 @@ import WishlistModal from "../components/WishlistModal";
 import ProductAdd from "../components/ProductAdd";
 import ProductList from "../components/ProductList";
 import Wishlist from "../components/Wishlist";
+import SideBar from "../components/SideBar";
+import ProductCard from "../components/ProductCard";
 
 const Dash = () => {
   const { user } = useSelector((state) => state.auth);
@@ -25,8 +27,8 @@ const Dash = () => {
     } else {
       setType("product");
     }
+    console.log(type);
   };
-
   return user ? (
     <div>
       <Row>
@@ -39,24 +41,16 @@ const Dash = () => {
           >
             <TabPane tab="Wishlists" key="1">
               <Row>
-                <Drawer type={type} setContent={setContent} />
-                <Col>
-                  <h1>Wishlist page</h1>
+                <SideBar type={type} setContent={setContent} />
+                {/* <Col>
                   <Wishlist content={content} type={type} />
-                </Col>
+                </Col> */}
               </Row>
             </TabPane>
             <TabPane tab="Products" key="2">
               <Row>
-                <Drawer type={type} setContent={setContent} />
-                <Col>
-                  <h1>Products page</h1>
-                  {content === "add_new" ? (
-                    <ProductAdd />
-                  ) : (
-                    <ProductList content={content} type={type} />
-                  )}
-                </Col>
+                <SideBar type={type} setContent={setContent} />
+                <Col>{content === "add_new" ? <ProductAdd /> : null}</Col>
               </Row>
             </TabPane>
           </Tabs>
