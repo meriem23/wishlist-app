@@ -27,7 +27,6 @@ const Dash = () => {
     } else {
       setType("product");
     }
-    console.log(type);
   };
   return user ? (
     <div>
@@ -45,9 +44,10 @@ const Dash = () => {
             >
               <Row>
                 <SideBar type={type} setContent={setContent} />
-                {/* <Col>
+
+                <Col>
                   <Wishlist content={content} type={type} />
-                </Col> */}
+                </Col>
               </Row>
             </TabPane>
             <TabPane
@@ -56,7 +56,13 @@ const Dash = () => {
             >
               <Row>
                 <SideBar type={type} setContent={setContent} />
-                <Col>{content === "add_new" ? <ProductAdd /> : null}</Col>
+                <Col>
+                  {content === "add_new" ? (
+                    <ProductAdd />
+                  ) : (
+                    <ProductCard content={content} type={type} />
+                  )}
+                </Col>
               </Row>
             </TabPane>
           </Tabs>

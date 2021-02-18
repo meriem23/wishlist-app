@@ -18,7 +18,7 @@ router.get("/", authMiddleware, (req, res) => {
 router.post(
   "/",
   [
-    //upload.single("Image"),
+    upload.single("Image"),
     authMiddleware,
     [
       body("Name", "Product Name is required").notEmpty(),
@@ -33,7 +33,6 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    //const img = req.file.filename;
     const { Name, Description, Price, Status, WishlistName } = req.body;
     const newProduct = new Product({
       Name,
@@ -41,7 +40,6 @@ router.post(
       Price,
       Status,
       WishlistName,
-      //Image: img,
       user: req.user.id,
     });
     newProduct

@@ -16,8 +16,11 @@ export const getProducts = () => (dispatch) => {
 /* Add a new product */
 export const addProduct = (newProduct) => (dispatch) => {
   setToken();
+  let config = {
+    "Content-Type": "form-data",
+  };
   axios
-    .post(`${process.env.REACT_APP_API_URL}product`, newProduct)
+    .post(`${process.env.REACT_APP_API_URL}product`, newProduct, config)
     .then((res) => dispatch(getProducts()))
     .catch((err) => {
       alert("Error adding new product");

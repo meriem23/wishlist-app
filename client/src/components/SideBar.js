@@ -43,13 +43,15 @@ const SideBar = ({ type, setContent }) => {
           )}
         </Button>
         {type === "product"
-          ? products && products.map((el) => <Menu.Item>{el.Name}</Menu.Item>)
+          ? products &&
+            products.map((el) => (
+              <Menu.Item onClick={() => setContent(el)}>{el.Name}</Menu.Item>
+            ))
           : type === "wishlist"
           ? wishlists &&
             wishlists.map((el) => (
-              <Menu.Item>
+              <Menu.Item onClick={() => setContent(el)}>
                 {el.wishlist}
-                {/* <WishlistDetails el={el} /> */}
               </Menu.Item>
             ))
           : null}

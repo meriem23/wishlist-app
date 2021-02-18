@@ -58,8 +58,8 @@ const WishlistModal = () => {
             ]}
           >
             <Input
-              prefix={<HeartOutlined className="site-form-item-icon" />}
-              placeholder="Your Wishlist name"
+              prefix={<HeartOutlined />}
+              placeholder="Wishlist Name"
               name="wishlist"
               onChange={handleChange}
             />

@@ -4,7 +4,7 @@ import { deleteProduct } from "../actions/productActions";
 import { Card, Typography } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ content }) => {
   const { Title, Text } = Typography;
   const dispatch = useDispatch();
   const deleteOneProduct = (id) => {
@@ -14,23 +14,23 @@ const ProductCard = ({ product }) => {
     <div>
       <Card
         style={{ width: 300 }}
-        cover={<img alt={product.Name} src={product.Image} />}
+        cover={<img alt={content.Name} src={content.Image} />}
         actions={[
           <DeleteOutlined
             key="delete"
             onClick={() => {
-              deleteOneProduct(product._id);
+              deleteOneProduct(content._id);
             }}
           />,
           <EditOutlined key="edit" />,
         ]}
       >
-        <Title level={3}>{product.Name}</Title>
+        <Title level={3}>{content.Name}</Title>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <Text>{product.Price}</Text>
-          <Text>{product.Description}</Text>
-          <Text>{product.Status}</Text>
-          <Text>{product.WishlistName}</Text>
+          <Text>{content.Price}</Text>
+          <Text>{content.Description}</Text>
+          <Text>{content.Status}</Text>
+          <Text>{content.WishlistName}</Text>
         </div>
       </Card>
     </div>

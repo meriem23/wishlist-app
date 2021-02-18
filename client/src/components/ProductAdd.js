@@ -22,6 +22,7 @@ const ProductAdd = () => {
   const [product, setProduct] = useState({
     Name: "",
     Description: "",
+    Image: "",
     Price: 0,
   });
   const [Status, setStatus] = useState({
@@ -66,9 +67,20 @@ const ProductAdd = () => {
           flexDirection: "column",
           marginTop: 15,
         }}
-        initialValues={{ remember: true }}
+        initialValues={{ remember: false }}
       >
-        <Form.Item>
+        {/* <Form.Item rules={[{ required: true }]}>
+          <Input
+            prefix={<FileImageOutlined />}
+            placeholder="Product Image"
+            name="Image"
+            type="file"
+            onChange={(e) =>
+              setProduct({ ...product, Image: e.target.files[0] })
+            }
+          />
+        </Form.Item> */}
+        <Form.Item rules={[{ required: true }]}>
           <Input
             prefix={<IdcardOutlined />}
             placeholder="Product Name"
@@ -76,7 +88,7 @@ const ProductAdd = () => {
             onChange={handleChange}
           />
         </Form.Item>
-        <Form.Item>
+        <Form.Item rules={[{ required: true }]}>
           <Input
             prefix={<MoneyCollectOutlined />}
             placeholder="Product Price"
@@ -85,7 +97,7 @@ const ProductAdd = () => {
             type="number"
           />
         </Form.Item>
-        <Form.Item>
+        <Form.Item rules={[{ required: true }]}>
           <Input
             prefix={<FileTextOutlined />}
             placeholder="Product Description"
