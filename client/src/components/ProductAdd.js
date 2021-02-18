@@ -6,6 +6,8 @@ import {
   FileImageOutlined,
   FileTextOutlined,
   UploadOutlined,
+  IdcardOutlined,
+  FormOutlined,
 } from "@ant-design/icons";
 import { addProduct } from "../actions/productActions";
 
@@ -28,7 +30,7 @@ const ProductAdd = () => {
     form.resetFields();
   };
   return (
-    <div className="formStyle">
+    <div className="formAddStyle">
       <div className="formText">
         <Image
           width={35}
@@ -50,6 +52,7 @@ const ProductAdd = () => {
       >
         <Form.Item>
           <Input
+            prefix={<IdcardOutlined />}
             placeholder="Product Name"
             name="Name"
             onChange={handleChange}
@@ -61,6 +64,7 @@ const ProductAdd = () => {
             placeholder="Product Price"
             name="Price"
             onChange={handleChange}
+            type="number"
           />
         </Form.Item>
         <Form.Item>
@@ -73,7 +77,7 @@ const ProductAdd = () => {
         </Form.Item>
         <Form.Item>
           <Input
-            prefix={<FileTextOutlined />}
+            prefix={<FormOutlined />}
             placeholder="Product Status"
             name="Status"
             onChange={handleChange}

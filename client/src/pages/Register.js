@@ -1,5 +1,10 @@
 import { Form, Input, Button, Typography, Image } from "antd";
-import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
+import {
+  UserOutlined,
+  LockOutlined,
+  MailOutlined,
+  TeamOutlined,
+} from "@ant-design/icons";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../actions/authActions";
@@ -53,7 +58,7 @@ const Register = () => {
       >
         <Form.Item>
           <Input
-            prefix={<UserOutlined className="site-form-item-icon" />}
+            prefix={<UserOutlined />}
             placeholder="Your First Name"
             name="fname"
             onChange={handleChange}
@@ -69,7 +74,7 @@ const Register = () => {
           ]}
         >
           <Input
-            prefix={<UserOutlined className="site-form-item-icon" />}
+            prefix={<TeamOutlined />}
             placeholder="Your Last Name"
             name="lname"
             onChange={handleChange}
@@ -85,7 +90,7 @@ const Register = () => {
           ]}
         >
           <Input
-            prefix={<MailOutlined className="site-form-item-icon" />}
+            prefix={<MailOutlined />}
             placeholder="Your Email"
             name="email"
             onChange={handleChange}
@@ -101,7 +106,7 @@ const Register = () => {
           ]}
         >
           <Input.Password
-            prefix={<LockOutlined className="site-form-item-icon" />}
+            prefix={<LockOutlined />}
             placeholder="Your Password"
             name="password"
             onChange={handleChange}

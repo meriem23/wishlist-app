@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Menu, Button, List } from "antd";
+import { Menu, Button, Typography } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 import { getProducts } from "../actions/productActions";
 import { getWishlists } from "../actions/wishlistActions";
-import ProductAdd from "./ProductAdd";
 import WishlistModal from "./WishlistModal";
 import WishlistDetails from "./WishlistDetails";
 
@@ -12,7 +12,7 @@ const SideBar = ({ type, setContent }) => {
   const { products } = useSelector((state) => state.product);
   const { wishlists } = useSelector((state) => state.wish);
   const [isModalVisible, setIsModalVisible] = useState(false);
-
+  const { Text } = Typography;
   useEffect(() => {
     if (type === "product") {
       dispatch(getProducts());
@@ -26,22 +26,31 @@ const SideBar = ({ type, setContent }) => {
   return (
     <div>
       <Menu
-        style={{ width: 250 }}
+        style={{ width: 250, height: "80vh" }}
         defaultSelectedKeys={["1"]}
         defaultOpenKeys={["sub1"]}
         onClick={showModal}
       >
         <Button type="ghost" className="add_btn">
-          {type === "wishlist" ? <WishlistModal /> : null}
+          {type === "wishlist" ? (
+            <WishlistModal />
+          ) : (
+            <Text className="textStyle">
+              <PlusOutlined
+                style={{ color: "#4bb2f2", marginRight: 20, fontSize: 15 }}
+              />
+              Add Product
+            </Text>
+          )}
         </Button>
         {type === "product"
           ? products && products.map((el) => <Menu.Item>{el.Name}</Menu.Item>)
           : type === "wishlist"
           ? wishlists &&
             wishlists.map((el) => (
-              <Menu.Item onClick={() => console.log("hello")}>
-                {/* {el.wishlist} */}
-                <WishlistDetails el={el} />
+              <Menu.Item>
+                {el.wishlist}
+                {/* <WishlistDetails el={el} /> */}
               </Menu.Item>
             ))
           : null}

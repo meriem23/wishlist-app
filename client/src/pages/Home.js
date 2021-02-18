@@ -39,7 +39,10 @@ const Dash = () => {
             tabBarExtraContent={<UserAvatar />}
             className="tabStyle"
           >
-            <TabPane tab="Wishlists" key="1">
+            <TabPane
+              tab={<i className="far fa-heart iconStyle"> Wishlist</i>}
+              key="1"
+            >
               <Row>
                 <SideBar type={type} setContent={setContent} />
                 {/* <Col>
@@ -47,7 +50,10 @@ const Dash = () => {
                 </Col> */}
               </Row>
             </TabPane>
-            <TabPane tab="Products" key="2">
+            <TabPane
+              tab={<i className="far fa-file-word"> Products</i>}
+              key="2"
+            >
               <Row>
                 <SideBar type={type} setContent={setContent} />
                 <Col>{content === "add_new" ? <ProductAdd /> : null}</Col>
