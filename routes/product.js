@@ -25,6 +25,7 @@ router.post(
       body("Description", "Product Description is required").notEmpty(),
       body("Price", "Product Price is required").notEmpty(),
       body("Status", "Product Status is required").notEmpty(),
+      body("WishlistName", "Wishlist is required").notEmpty(),
     ],
   ],
   (req, res) => {
@@ -33,12 +34,13 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     //const img = req.file.filename;
-    const { Name, Description, Price, Status } = req.body;
+    const { Name, Description, Price, Status, WishlistName } = req.body;
     const newProduct = new Product({
       Name,
       Description,
       Price,
       Status,
+      WishlistName,
       //Image: img,
       user: req.user.id,
     });
@@ -70,13 +72,14 @@ router.delete("/:id", authMiddleware, (req, res) => {
 
 /*Edit a product*/
 router.put("/:id", authMiddleware, (req, res) => {
-  const { Name, Description, Price, Image, Status } = req.body;
+  const { Name, Description, Price, Image, Status, Wishlist } = req.body;
   let productFields = {};
   if (Name) productFields.Name = Name;
   if (Description) productFields.Description = Description;
   if (Price) productFields.Price = Price;
   if (Image) productFields.Image = Image;
   if (Status) productFields.Status = Status;
+  if (Wishlist) productFields.Wishlist = Wishlist;
 
   Product.findById(req.params.id).then((product) => {
     if (!product) {

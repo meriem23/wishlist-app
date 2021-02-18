@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Form, Input, Button, Typography, Image } from "antd";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Form, Input, Button, Typography, Image, Select } from "antd";
 import {
   MoneyCollectOutlined,
   FileImageOutlined,
@@ -10,27 +10,44 @@ import {
   FormOutlined,
 } from "@ant-design/icons";
 import { addProduct } from "../actions/productActions";
+import { getWishlists } from "../actions/wishlistActions";
 
 const ProductAdd = () => {
+  const { Option } = Select;
+  const dispatch = useDispatch();
+  const { wishlists } = useSelector((state) => state.wish);
+  useEffect(() => {
+    dispatch(getWishlists());
+  }, []);
   const [product, setProduct] = useState({
     Name: "",
     Description: "",
     Price: 0,
+  });
+  const [Status, setStatus] = useState({
     Status: "",
+  });
+  const [WishlistName, setWishlist] = useState({
+    WishlistName: "",
   });
   const { Title } = Typography;
   const [form] = Form.useForm();
-  const dispatch = useDispatch();
   const handleChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
+  const handleStatus = (value) => {
+    setStatus(value);
+  };
+  const handleWishlist = (value) => {
+    setWishlist(value);
+  };
+  const info = { Status, ...product, WishlistName };
   const addNewProduct = (e) => {
     e.preventDefault();
-    dispatch(addProduct(product));
-    form.resetFields();
+    dispatch(addProduct(info));
   };
   return (
-    <div className="formAddStyle">
+    <div>
       <div className="formText">
         <Image
           width={35}
@@ -49,6 +66,7 @@ const ProductAdd = () => {
           flexDirection: "column",
           marginTop: 15,
         }}
+        initialValues={{ remember: true }}
       >
         <Form.Item>
           <Input
@@ -75,13 +93,26 @@ const ProductAdd = () => {
             onChange={handleChange}
           />
         </Form.Item>
-        <Form.Item>
-          <Input
-            prefix={<FormOutlined />}
+        <Form.Item rules={[{ required: true }]}>
+          <Select
+            suffixIcon={<FormOutlined />}
             placeholder="Product Status"
-            name="Status"
-            onChange={handleChange}
-          />
+            onChange={handleStatus}
+          >
+            <Option value="To Buy">To Buy</Option>
+            <Option value="Bought">Bought</Option>
+          </Select>
+        </Form.Item>
+        <Form.Item rules={[{ required: true }]}>
+          <Select
+            suffixIcon={<FormOutlined />}
+            placeholder="Choose Wishlist"
+            onChange={handleWishlist}
+          >
+            {wishlists.map((el) => (
+              <Option value={el.wishlist}>{el.wishlist}</Option>
+            ))}
+          </Select>
         </Form.Item>
         <Form.Item>
           <Button type="primary" onClick={addNewProduct}>

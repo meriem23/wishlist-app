@@ -10,7 +10,7 @@ const UserAvatar = () => {
   const menu = (
     <Menu>
       <Menu.Item>
-        <p onClick={() => dispatch(logoutUser())}>Logout</p>
+        <p onClick={() => dispatch(logoutUser())}>{`${user.fname}, logout?`}</p>
       </Menu.Item>
     </Menu>
   );

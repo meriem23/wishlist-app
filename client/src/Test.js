@@ -1,34 +1,38 @@
-import { Card, Avatar } from "antd";
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { Select } from "antd";
 
-const { Meta } = Card;
+const { Option } = Select;
+
+function handleChange(value) {
+  console.log(`selected ${value}`);
+}
 
 ReactDOM.render(
-  <Card
-    style={{ width: 300 }}
-    cover={
-      <img
-        alt="example"
-        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-      />
-    }
-    actions={[
-      <SettingOutlined key="setting" />,
-      <EditOutlined key="edit" />,
-      <EllipsisOutlined key="ellipsis" />,
-    ]}
-  >
-    <Meta
-      avatar={
-        <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-      }
-      title="Card title"
-      description="This is the description"
-    />
-  </Card>,
+  <>
+    <Select defaultValue="lucy" style={{ width: 120 }} onChange={handleChange}>
+      <Option value="jack">Jack</Option>
+      <Option value="lucy">Lucy</Option>
+      <Option value="disabled" disabled>
+        Disabled
+      </Option>
+      <Option value="Yiminghe">yiminghe</Option>
+    </Select>
+    <Select defaultValue="lucy" style={{ width: 120 }} disabled>
+      <Option value="lucy">Lucy</Option>
+    </Select>
+    <Select defaultValue="lucy" style={{ width: 120 }} loading>
+      <Option value="lucy">Lucy</Option>
+    </Select>
+    <Select defaultValue="lucy" style={{ width: 120 }} allowClear>
+      <Option value="lucy">Lucy</Option>
+    </Select>
+  </>,
   mountNode
 );
+
+<Select suffixIcon={<FormOutlined />} placeholder="Choose Wishlist">
+  <Option value={}>
+    {wishlists.map((el) => (
+      <Text>{el.wishlist}</Text>
+    ))}
+  </Option>
+</Select>;

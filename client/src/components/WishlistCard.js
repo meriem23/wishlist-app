@@ -18,7 +18,6 @@ const WishlistCard = ({ wishlist }) => {
         onClick={() => {
           deleteOneWishlist(wishlist._id);
         }}
-        // style={{ color: "red", fontSize: "20px" }}
       />
       <EditOutlined key="edit" />
     </div>

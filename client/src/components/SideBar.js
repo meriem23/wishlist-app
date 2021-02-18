@@ -5,7 +5,6 @@ import { PlusOutlined } from "@ant-design/icons";
 import { getProducts } from "../actions/productActions";
 import { getWishlists } from "../actions/wishlistActions";
 import WishlistModal from "./WishlistModal";
-import WishlistDetails from "./WishlistDetails";
 
 const SideBar = ({ type, setContent }) => {
   const dispatch = useDispatch();

@@ -4,7 +4,7 @@ import { deleteProduct } from "../actions/productActions";
 import { Card, Typography } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
-const ProductCard = ({ product, type, content }) => {
+const ProductCard = ({ product }) => {
   const { Title, Text } = Typography;
   const dispatch = useDispatch();
   const deleteOneProduct = (id) => {
@@ -26,7 +26,12 @@ const ProductCard = ({ product, type, content }) => {
         ]}
       >
         <Title level={3}>{product.Name}</Title>
-        <Text>{product.Description}</Text>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <Text>{product.Price}</Text>
+          <Text>{product.Description}</Text>
+          <Text>{product.Status}</Text>
+          <Text>{product.WishlistName}</Text>
+        </div>
       </Card>
     </div>
   );

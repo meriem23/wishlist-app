@@ -47,13 +47,6 @@ const WishlistModal = () => {
           initialValues={{
             remember: true,
           }}
-          // style={{
-          //   width: 310,
-          //   display: "flex",
-          //   justifyContent: "center",
-          //   flexDirection: "column",
-          //   marginTop: 15,
-          // }}
         >
           <Form.Item
             name="wishlist"
