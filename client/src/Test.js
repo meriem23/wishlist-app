@@ -1,38 +1,27 @@
-import { Select } from "antd";
+import { Upload, message, Button } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 
-const { Option } = Select;
-
-function handleChange(value) {
-  console.log(`selected ${value}`);
-}
+const props = {
+  name: "file",
+  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+  headers: {
+    authorization: "authorization-text",
+  },
+  onChange(info) {
+    if (info.file.status !== "uploading") {
+      console.log(info.file, info.fileList);
+    }
+    if (info.file.status === "done") {
+      message.success(`${info.file.name} file uploaded successfully`);
+    } else if (info.file.status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  },
+};
 
 ReactDOM.render(
-  <>
-    <Select defaultValue="lucy" style={{ width: 120 }} onChange={handleChange}>
-      <Option value="jack">Jack</Option>
-      <Option value="lucy">Lucy</Option>
-      <Option value="disabled" disabled>
-        Disabled
-      </Option>
-      <Option value="Yiminghe">yiminghe</Option>
-    </Select>
-    <Select defaultValue="lucy" style={{ width: 120 }} disabled>
-      <Option value="lucy">Lucy</Option>
-    </Select>
-    <Select defaultValue="lucy" style={{ width: 120 }} loading>
-      <Option value="lucy">Lucy</Option>
-    </Select>
-    <Select defaultValue="lucy" style={{ width: 120 }} allowClear>
-      <Option value="lucy">Lucy</Option>
-    </Select>
-  </>,
+  <Upload {...props}>
+    <Button icon={<UploadOutlined />}>Click to Upload</Button>
+  </Upload>,
   mountNode
 );
-
-<Select suffixIcon={<FormOutlined />} placeholder="Choose Wishlist">
-  <Option value={}>
-    {wishlists.map((el) => (
-      <Text>{el.wishlist}</Text>
-    ))}
-  </Option>
-</Select>;

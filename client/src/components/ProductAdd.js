@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Form, Input, Button, Typography, Image, Select } from "antd";
+import { Form, Input, Button, Typography, Image, Select, Upload } from "antd";
 import {
   MoneyCollectOutlined,
   FileImageOutlined,
@@ -8,6 +8,7 @@ import {
   UploadOutlined,
   IdcardOutlined,
   FormOutlined,
+  PictureOutlined,
 } from "@ant-design/icons";
 import { addProduct } from "../actions/productActions";
 import { getWishlists } from "../actions/wishlistActions";
@@ -66,23 +67,14 @@ const ProductAdd = () => {
         }}
         initialValues={{ remember: false }}
       >
-        {/* <Form.Item rules={[{ required: true }]}>
-          <Input
-            prefix={<FileImageOutlined />}
-            placeholder="Product Image"
-            name="Image"
-            type="file"
-            onChange={selectImage}
-          />
-        </Form.Item> */}
-        <div>
+        {/* <div>
           <label htmlFor="">Upload Image</label>
           <input
             type="file"
             name="Image"
             onChange={(e) => setFile({ Image: e.target.files[0] })}
           />
-        </div>
+        </div> */}
         <Form.Item rules={[{ required: true }]}>
           <Input
             prefix={<IdcardOutlined />}
@@ -106,6 +98,15 @@ const ProductAdd = () => {
             placeholder="Product Description"
             name="Description"
             onChange={handleChange}
+          />
+        </Form.Item>
+        <Form.Item rules={[{ required: true }]}>
+          <Input
+            prefix={<PictureOutlined />}
+            placeholder="Product Image"
+            type="file"
+            name="Image"
+            onChange={(e) => setFile({ Image: e.target.files[0] })}
           />
         </Form.Item>
         <Form.Item rules={[{ required: true }]}>
