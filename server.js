@@ -18,7 +18,6 @@ app.use("/api/register", require("./routes/register"));
 app.use("/api/login", require("./routes/login"));
 app.use("/api/product", require("./routes/product"));
 app.use("/api/wishlist", require("./routes/wishlist"));
-app.use("/api/upload", require("./routes/upload"));
 
 // Listening to the server 5000
 const port = process.env.PORT || 5000;

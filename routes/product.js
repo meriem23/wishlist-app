@@ -3,6 +3,7 @@ const router = express.Router();
 const Product = require("../models/Product");
 const authMiddleware = require("../middlewares/authMiddleware");
 const { body, validationResult } = require("express-validator");
+const multer = require("multer");
 
 /* Private Routes */
 
@@ -15,9 +16,21 @@ router.get("/", authMiddleware, (req, res) => {
 });
 
 /* Post Product */
+var storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+var upload = multer({
+  storage: storage,
+});
 router.post(
   "/",
   [
+    upload.single("Image"),
     authMiddleware,
     [
       body("Name", "Product Name is required").notEmpty(),
@@ -32,13 +45,18 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { Name, Description, Price, Status, WishlistName } = req.body;
+    //console.log(req.body);
+    let theBody = JSON.parse(req.body.info);
+    // console.log(theBody);
+    let path = `${req.protocol}://${req.hostname}:5000/uploads/${req.file.filename}`;
+    const { Name, Description, Price, Status, WishlistName } = theBody;
     const newProduct = new Product({
       Name,
       Description,
       Price,
       Status,
       WishlistName,
+      Image: path,
       user: req.user.id,
     });
     newProduct

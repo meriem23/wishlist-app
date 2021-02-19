@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteProduct } from "../actions/productActions";
-import { Card, Typography } from "antd";
+import { Card, Typography, Image } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const ProductCard = ({ content }) => {

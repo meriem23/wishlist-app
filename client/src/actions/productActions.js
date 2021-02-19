@@ -14,13 +14,13 @@ export const getProducts = () => (dispatch) => {
 };
 
 /* Add a new product */
-export const addProduct = (newProduct) => (dispatch) => {
+export const addProduct = (info, file) => (dispatch) => {
   setToken();
-  let config = {
-    "Content-Type": "form-data",
-  };
+  let formData = new FormData();
+  formData.append("Image", file);
+  formData.append("info", JSON.stringify(info));
   axios
-    .post(`${process.env.REACT_APP_API_URL}product`, newProduct, config)
+    .post(`${process.env.REACT_APP_API_URL}product`, formData)
     .then((res) => dispatch(getProducts()))
     .catch((err) => {
       alert("Error adding new product");

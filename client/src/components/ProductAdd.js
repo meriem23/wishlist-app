@@ -24,15 +24,10 @@ const ProductAdd = () => {
   const [product, setProduct] = useState({
     Name: "",
     Description: "",
-    Image: "",
     Price: 0,
   });
-  const [Status, setStatus] = useState({
-    Status: "",
-  });
-  const [WishlistName, setWishlist] = useState({
-    WishlistName: "",
-  });
+  const [Status, setStatus] = useState(null);
+  const [WishlistName, setWishlist] = useState(null);
   const { Title } = Typography;
   const [form] = Form.useForm();
   const handleChange = (e) => {
@@ -44,16 +39,10 @@ const ProductAdd = () => {
   const handleWishlist = (value) => {
     setWishlist(value);
   };
-  // const selectImage = (e) => {
-  //   setFile(e.target.files[0]);
-  // };
-  const info = { Status, ...product, WishlistName };
-  const addNewProduct = (e) => {
+  let info = { Status, ...product, WishlistName };
+  const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addProduct(info));
-    let formData = new FormData();
-    formData.append("Image", product);
-    axios.post("/", formData).then((res) => console.log(res));
+    dispatch(addProduct(info, file));
   };
   return (
     <div>
@@ -91,9 +80,7 @@ const ProductAdd = () => {
           <input
             type="file"
             name="Image"
-            onChange={(e) =>
-              setProduct({ ...product, Image: e.target.files[0] })
-            }
+            onChange={(e) => setFile({ Image: e.target.files[0] })}
           />
         </div>
         <Form.Item rules={[{ required: true }]}>
@@ -143,7 +130,7 @@ const ProductAdd = () => {
           </Select>
         </Form.Item>
         <Form.Item>
-          <Button type="primary" onClick={addNewProduct}>
+          <Button type="primary" onClick={handleSubmit}>
             Add
           </Button>
         </Form.Item>
