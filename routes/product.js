@@ -3,7 +3,7 @@ const router = express.Router();
 const Product = require("../models/Product");
 const authMiddleware = require("../middlewares/authMiddleware");
 const { body, validationResult } = require("express-validator");
-const upload = require("../config/multerStorage");
+
 /* Private Routes */
 
 /* Get all products*/
@@ -18,7 +18,6 @@ router.get("/", authMiddleware, (req, res) => {
 router.post(
   "/",
   [
-    upload.single("Image"),
     authMiddleware,
     [
       body("Name", "Product Name is required").notEmpty(),

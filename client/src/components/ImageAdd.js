@@ -10,17 +10,10 @@ import {
   FormOutlined,
 } from "@ant-design/icons";
 import { addProduct } from "../actions/productActions";
-import { getWishlists } from "../actions/wishlistActions";
-import axios from "axios";
 
 const ProductAdd = () => {
-  const { Option } = Select;
   const dispatch = useDispatch();
   const { wishlists } = useSelector((state) => state.wish);
-  useEffect(() => {
-    dispatch(getWishlists());
-  }, []);
-  const [file, setFile] = useState(null);
   const [product, setProduct] = useState({
     Name: "",
     Description: "",
@@ -44,16 +37,10 @@ const ProductAdd = () => {
   const handleWishlist = (value) => {
     setWishlist(value);
   };
-  // const selectImage = (e) => {
-  //   setFile(e.target.files[0]);
-  // };
   const info = { Status, ...product, WishlistName };
   const addNewProduct = (e) => {
     e.preventDefault();
     dispatch(addProduct(info));
-    let formData = new FormData();
-    formData.append("Image", product);
-    axios.post("/", formData).then((res) => console.log(res));
   };
   return (
     <div>
@@ -77,70 +64,16 @@ const ProductAdd = () => {
         }}
         initialValues={{ remember: false }}
       >
-        {/* <Form.Item rules={[{ required: true }]}>
+        <Form.Item rules={[{ required: true }]}>
           <Input
             prefix={<FileImageOutlined />}
             placeholder="Product Image"
             name="Image"
             type="file"
-            onChange={selectImage}
-          />
-        </Form.Item> */}
-        <div>
-          <label htmlFor="">Upload Image</label>
-          <input
-            type="file"
-            name="Image"
             onChange={(e) =>
               setProduct({ ...product, Image: e.target.files[0] })
             }
           />
-        </div>
-        <Form.Item rules={[{ required: true }]}>
-          <Input
-            prefix={<IdcardOutlined />}
-            placeholder="Product Name"
-            name="Name"
-            onChange={handleChange}
-          />
-        </Form.Item>
-        <Form.Item rules={[{ required: true }]}>
-          <Input
-            prefix={<MoneyCollectOutlined />}
-            placeholder="Product Price"
-            name="Price"
-            onChange={handleChange}
-            type="number"
-          />
-        </Form.Item>
-        <Form.Item rules={[{ required: true }]}>
-          <Input
-            prefix={<FileTextOutlined />}
-            placeholder="Product Description"
-            name="Description"
-            onChange={handleChange}
-          />
-        </Form.Item>
-        <Form.Item rules={[{ required: true }]}>
-          <Select
-            suffixIcon={<FormOutlined />}
-            placeholder="Product Status"
-            onChange={handleStatus}
-          >
-            <Option value="To Buy">To Buy</Option>
-            <Option value="Bought">Bought</Option>
-          </Select>
-        </Form.Item>
-        <Form.Item rules={[{ required: true }]}>
-          <Select
-            suffixIcon={<FormOutlined />}
-            placeholder="Choose Wishlist"
-            onChange={handleWishlist}
-          >
-            {wishlists.map((el) => (
-              <Option value={el.wishlist}>{el.wishlist}</Option>
-            ))}
-          </Select>
         </Form.Item>
         <Form.Item>
           <Button type="primary" onClick={addNewProduct}>
