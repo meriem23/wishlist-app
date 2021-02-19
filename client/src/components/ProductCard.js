@@ -12,27 +12,29 @@ const ProductCard = ({ content }) => {
   };
   return (
     <div>
-      <Card
-        style={{ width: 300 }}
-        cover={<img alt={content.Name} src={content.Image} />}
-        actions={[
-          <DeleteOutlined
-            key="delete"
-            onClick={() => {
-              deleteOneProduct(content._id);
-            }}
-          />,
-          <EditOutlined key="edit" />,
-        ]}
-      >
-        <Title level={3}>{content.Name}</Title>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <Text>{content.Price}</Text>
-          <Text>{content.Description}</Text>
-          <Text>{content.Status}</Text>
-          <Text>{content.WishlistName}</Text>
-        </div>
-      </Card>
+      {content && (
+        <Card
+          style={{ width: 300 }}
+          cover={<img alt={content.Name} src={content.Image} />}
+          actions={[
+            <DeleteOutlined
+              key="delete"
+              onClick={() => {
+                deleteOneProduct(content._id);
+              }}
+            />,
+            <EditOutlined key="edit" />,
+          ]}
+        >
+          <Title level={3}>{content.Name}</Title>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <Text>{content.Price}</Text>
+            <Text>{content.Description}</Text>
+            <Text>{content.Status}</Text>
+            <Text>{content.WishlistName}</Text>
+          </div>
+        </Card>
+      )}
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Row, Col, Tabs } from "antd";
-import { HeartOutlined } from "@ant-design/icons";
 import { loadUser } from "../actions/authActions";
 import UserAvatar from "../components/UserAvatar";
 import WishlistModal from "../components/WishlistModal";

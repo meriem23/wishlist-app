@@ -11,14 +11,6 @@ const WishlistCard = ({ wishlist, products }) => {
     dispatch(deleteWishlist(id));
   };
   const { Title } = Typography;
-  // useEffect(() => {
-  //   console.log(products);
-  // }, []);
-  // {wishlists.wishlist === products.WishlistName
-  //   ? wishlists.map((wishlist) => (
-  //       <WishlistCard wishlist={wishlist} product={products} />
-  //     ))
-  //   : null}
   return (
     <div>
       <Row>
