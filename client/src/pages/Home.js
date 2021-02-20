@@ -58,7 +58,7 @@ const Dash = () => {
                   {content === "add_new" ? (
                     <ProductAdd />
                   ) : (
-                    <ProductCard content={content} />
+                    <ProductCard setContent={setContent} content={content} />
                   )}
                 </Col>
               </Row>

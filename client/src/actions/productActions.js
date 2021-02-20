@@ -16,11 +16,12 @@ export const getProducts = () => (dispatch) => {
 /* Add a new product */
 export const addProduct = (info) => (dispatch) => {
   setToken();
-  // let formData = new FormData();
-  // formData.append("Image", file);
+  let formData = new FormData();
+  Object.keys(info).map((el) => formData.append(el, info[el]));
+  // formData.append("Image", info.Image);
   // formData.append("info", JSON.stringify(info));
   axios
-    .post(`${process.env.REACT_APP_API_URL}product`, info)
+    .post(`${process.env.REACT_APP_API_URL}product`, formData)
     .then((res) => dispatch(getProducts()))
     .catch((err) => {
       alert("Error adding new product");

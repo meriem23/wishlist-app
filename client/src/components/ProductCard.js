@@ -1,14 +1,21 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct } from "../actions/productActions";
 import { Card, Typography, Image } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
-const ProductCard = ({ content }) => {
+const ProductCard = ({ content, setContent }) => {
   const { Text } = Typography;
+  const { products } = useSelector((state) => state.product);
+
   const dispatch = useDispatch();
   const deleteOneProduct = (id) => {
     dispatch(deleteProduct(id));
+    if (products.length === 1) {
+      setContent("add_new");
+    } else {
+      setContent(products[0]);
+    }
   };
   return (
     <div className="cardStyle">
@@ -19,7 +26,7 @@ const ProductCard = ({ content }) => {
           cover={
             <img
               alt={content.Name}
-              src={content.Image}
+              src={process.env.REACT_APP_STORAGE + content.Image}
               style={{
                 width: " 100%",
                 height: "auto",

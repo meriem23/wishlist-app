@@ -20,10 +20,10 @@ const ProductAdd = () => {
   useEffect(() => {
     dispatch(getWishlists());
   }, []);
-  const [file, setFile] = useState(null);
   const [product, setProduct] = useState({
     Name: "",
     Description: "",
+    Image: "",
     Price: 0,
   });
   const [Status, setStatus] = useState(null);
@@ -110,15 +110,17 @@ const ProductAdd = () => {
           </Select>
         </Form.Item>
 
-        {/* <Form.Item rules={[{ required: true }]}>
+        <Form.Item rules={[{ required: true }]}>
           <Input
             prefix={<FileImageOutlined />}
             placeholder="Product Image"
             type="file"
             name="Image"
-            onChange={(e) => setFile({ Image: e.target.files[0] })}
+            onChange={(e) =>
+              setProduct({ ...product, Image: e.target.files[0] })
+            }
           />
-        </Form.Item> */}
+        </Form.Item>
         <Form.Item>
           <Button type="primary" onClick={handleSubmit}>
             Add

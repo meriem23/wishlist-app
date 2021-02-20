@@ -31,7 +31,11 @@ const SideBar = ({ type, setContent }) => {
         defaultOpenKeys={["sub1"]}
         onClick={showModal}
       >
-        <Button type="ghost" className="add_btn">
+        <Button
+          type="ghost"
+          className="add_btn"
+          onClick={() => setContent("add_new")}
+        >
           {type === "wishlist" ? (
             <WishlistModal />
           ) : (

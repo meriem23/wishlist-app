@@ -45,10 +45,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    //console.log(req.body);
-    //let theBody = JSON.parse(req.body.info);
-    // console.log(theBody);
-    //let path = `${req.protocol}://${req.hostname}:5000/uploads/${req.file.filename}`;
+    let path = `/${req.file.filename}`;
     const { Name, Description, Price, Status, WishlistName } = req.body;
     const newProduct = new Product({
       Name,
@@ -56,7 +53,7 @@ router.post(
       Price,
       Status,
       WishlistName,
-      //Image: path,
+      Image: path,
       user: req.user.id,
     });
     newProduct
