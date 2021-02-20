@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_PRODUCTS, DELETE_PRODUCT, EDIT_PRODUCTS } from "./types";
+import { GET_PRODUCTS, DELETE_PRODUCT, EDIT_PRODUCT } from "./types";
 import setToken from "../setToken";
 
 /* Get all products*/
@@ -18,8 +18,6 @@ export const addProduct = (info) => (dispatch) => {
   setToken();
   let formData = new FormData();
   Object.keys(info).map((el) => formData.append(el, info[el]));
-  // formData.append("Image", info.Image);
-  // formData.append("info", JSON.stringify(info));
   axios
     .post(`${process.env.REACT_APP_API_URL}product`, formData)
     .then((res) => dispatch(getProducts()))
@@ -33,6 +31,20 @@ export const deleteProduct = (id) => async (dispatch) => {
   dispatch({
     type: DELETE_PRODUCT,
     payload: id,
+  });
+  dispatch(getProducts());
+};
+/* Edit a product */
+export const editProduct = (info) => async (dispatch) => {
+  let formData = new FormData();
+  Object.keys(info).map((el) => formData.append(el, info[el]));
+  const res = await axios.put(
+    `${process.env.REACT_APP_API_URL}product/${info._id}`,
+    formData
+  );
+  await dispatch({
+    type: EDIT_PRODUCT,
+    payload: res.data,
   });
   dispatch(getProducts());
 };

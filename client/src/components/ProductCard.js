@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct } from "../actions/productActions";
 import { Card, Typography, Image } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { motion, AnimatePresence } from "framer-motion";
+import ProductAdd from "./ProductAdd";
 
 const ProductCard = ({ content, setContent }) => {
   const { Text } = Typography;
   const { products } = useSelector((state) => state.product);
+  const [editMode, setEditMode] = useState(false);
 
   const dispatch = useDispatch();
   const deleteOneProduct = (id) => {
@@ -17,7 +20,7 @@ const ProductCard = ({ content, setContent }) => {
       setContent(products[0]);
     }
   };
-  return (
+  return !editMode ? (
     <div className="cardStyle">
       {content.Name ? (
         <Card
@@ -26,7 +29,11 @@ const ProductCard = ({ content, setContent }) => {
           cover={
             <img
               alt={content.Name}
-              src={process.env.REACT_APP_STORAGE + content.Image}
+              src={
+                content.Image
+                  ? process.env.REACT_APP_STORAGE + content.Image
+                  : "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
+              }
               style={{
                 width: " 100%",
                 height: "auto",
@@ -42,7 +49,7 @@ const ProductCard = ({ content, setContent }) => {
                 deleteOneProduct(content._id);
               }}
             />,
-            <EditOutlined key="edit" />,
+            <EditOutlined key="edit" onClick={() => setEditMode(true)} />,
           ]}
         >
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -66,6 +73,20 @@ const ProductCard = ({ content, setContent }) => {
         </Card>
       ) : null}
     </div>
+  ) : (
+    <AnimatePresence exitBeforeEnter={false}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <ProductAdd
+          editMode={editMode}
+          setEditMode={setEditMode}
+          content={content}
+        />
+      </motion.div>
+    </AnimatePresence>
   );
 };
 

@@ -45,7 +45,10 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    let path = `/${req.file.filename}`;
+    let path;
+    if (req.file) {
+      path = `/${req.file.filename}`;
+    }
     const { Name, Description, Price, Status, WishlistName } = req.body;
     const newProduct = new Product({
       Name,
@@ -53,7 +56,7 @@ router.post(
       Price,
       Status,
       WishlistName,
-      Image: path,
+      Image: path || null,
       user: req.user.id,
     });
     newProduct
@@ -83,31 +86,49 @@ router.delete("/:id", authMiddleware, (req, res) => {
 });
 
 /*Edit a product*/
-router.put("/:id", authMiddleware, (req, res) => {
-  const { Name, Description, Price, Image, Status, Wishlist } = req.body;
-  let productFields = {};
-  if (Name) productFields.Name = Name;
-  if (Description) productFields.Description = Description;
-  if (Price) productFields.Price = Price;
-  if (Image) productFields.Image = Image;
-  if (Status) productFields.Status = Status;
-  if (Wishlist) productFields.Wishlist = Wishlist;
-
-  Product.findById(req.params.id).then((product) => {
-    if (!product) {
-      return res.status(404).json({ msg: "Product not found" });
-    } else if (product.user.toString() !== req.user.id) {
-      res.status(401).json({ msg: "Not authorized" });
-    } else {
-      Product.findByIdAndUpdate(
-        req.params.id,
-        { $set: productFields },
-        (err, data) => {
-          res.json({ msg: "Product updated" });
-        }
-      );
+router.put(
+  "/:id",
+  [
+    upload.single("Image"),
+    authMiddleware,
+    [
+      body("Name", "Product Name is required").notEmpty(),
+      body("Description", "Product Description is required").notEmpty(),
+      body("Price", "Product Price is required").notEmpty(),
+      body("Status", "Product Status is required").notEmpty(),
+      body("WishlistName", "Wishlist is required").notEmpty(),
+    ],
+  ],
+  (req, res) => {
+    let path;
+    if (req.file) {
+      path = `/${req.file.filename}`;
     }
-  });
-});
+    const { Name, Description, Price, Status, Image, WishlistName } = req.body;
+    let productFields = {};
+    if (Name) productFields.Name = Name;
+    if (Description) productFields.Description = Description;
+    if (Price) productFields.Price = Price;
+    if (Status) productFields.Status = Status;
+    if (WishlistName) productFields.WishlistName = WishlistName;
+    (productFields.Image = path || null),
+      Product.findById(req.params.id).then((product) => {
+        if (!product) {
+          return res.status(404).json({ msg: "Product not found" });
+        } else if (product.user.toString() !== req.user.id) {
+          res.status(401).json({ msg: "Not authorized" });
+        } else {
+          Product.findByIdAndUpdate(
+            req.params.id,
+            { $set: productFields },
+            { new: true },
+            (err, data) => {
+              res.json(data);
+            }
+          );
+        }
+      });
+  }
+);
 
 module.exports = router;

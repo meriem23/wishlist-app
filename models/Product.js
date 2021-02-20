@@ -6,11 +6,7 @@ const ProductSchema = mongoose.Schema({
   Name: String,
   Description: String,
   Price: String,
-  Image: {
-    type: String,
-    default:
-      "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
-  },
+  Image: String,
   Status: String,
   date: { type: Date, default: Date.now },
 });

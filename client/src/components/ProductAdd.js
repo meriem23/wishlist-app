@@ -9,50 +9,80 @@ import {
   FormOutlined,
   PictureOutlined,
 } from "@ant-design/icons";
-import { addProduct } from "../actions/productActions";
+import { addProduct, editProduct } from "../actions/productActions";
 import { getWishlists } from "../actions/wishlistActions";
-import axios from "axios";
 
-const ProductAdd = () => {
-  const { Option } = Select;
+const { Option } = Select;
+
+const ProductAdd = ({ editMode, setEditMode, content }) => {
+  const [productToUpdate, setProductToUpdate] = useState(null);
   const dispatch = useDispatch();
   const { wishlists } = useSelector((state) => state.wish);
   useEffect(() => {
     dispatch(getWishlists());
   }, []);
+
+  useEffect(() => {
+    if (editMode) {
+      setProductToUpdate(content);
+    } else return;
+  }, [editMode]);
+
   const [product, setProduct] = useState({
     Name: "",
     Description: "",
     Image: "",
-    Price: 0,
+    Price: "",
   });
   const [Status, setStatus] = useState(null);
   const [WishlistName, setWishlist] = useState(null);
   const { Title } = Typography;
   const [form] = Form.useForm();
   const handleChange = (e) => {
-    setProduct({ ...product, [e.target.name]: e.target.value });
+    if (editMode) {
+      setProductToUpdate({
+        ...productToUpdate,
+        [e.target.name]: e.target.value,
+      });
+    } else {
+      setProduct({ ...product, [e.target.name]: e.target.value });
+    }
   };
   const handleStatus = (value) => {
-    setStatus(value);
+    if (editMode) {
+      setProductToUpdate({ ...productToUpdate, Status: value });
+    } else {
+      setProduct({ ...product, WishlistName: value });
+    }
   };
   const handleWishlist = (value) => {
-    setWishlist(value);
+    if (editMode) {
+      setProductToUpdate({ ...productToUpdate, WishlistName: value });
+    } else {
+      setProduct({ ...product, WishlistName: value });
+    }
   };
-  let info = { Status, ...product, WishlistName };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addProduct(info));
+    if (editMode) {
+      dispatch(editProduct(productToUpdate));
+      setEditMode(false);
+    } else {
+      dispatch(addProduct(product));
+    }
   };
+
+  const handleChangeImage = (e) => {
+    if (editMode) {
+      setProductToUpdate({ ...productToUpdate, Image: e.target.files[0] });
+    } else {
+      setProduct({ ...product, Image: e.target.files[0] });
+    }
+  };
+
   return (
     <div className="addFormStyle">
       <div className="formText">
-        {/* <Image
-          width={35}
-          preview={false}
-          src="./wishlist.png"
-          alt="wishlist logo"
-        /> */}
         <Title level={3}>Add Product</Title>
       </div>
       <Form
@@ -73,6 +103,9 @@ const ProductAdd = () => {
             placeholder="Name"
             name="Name"
             onChange={handleChange}
+            value={
+              editMode && productToUpdate ? productToUpdate.Name : product.Name
+            }
           />
           <Input
             prefix={<MoneyCollectOutlined style={{ color: "#4bb2f2" }} />}
@@ -80,6 +113,11 @@ const ProductAdd = () => {
             placeholder="Price"
             name="Price"
             onChange={handleChange}
+            value={
+              editMode && productToUpdate
+                ? productToUpdate.Price
+                : product.Price
+            }
           />
 
           <Input
@@ -88,12 +126,22 @@ const ProductAdd = () => {
             placeholder="Description"
             name="Description"
             onChange={handleChange}
+            value={
+              editMode && productToUpdate
+                ? productToUpdate.Description
+                : product.Description
+            }
           />
           <Select
             suffixIcon={<FormOutlined style={{ color: "#4bb2f2" }} />}
             style={{ width: "100%", margin: "10px 0px" }}
             placeholder="Status"
             onChange={handleStatus}
+            value={
+              editMode && productToUpdate
+                ? productToUpdate.Status
+                : product.Status
+            }
           >
             <Option value="To Buy">To Buy</Option>
             <Option value="Bought">Bought</Option>
@@ -103,6 +151,11 @@ const ProductAdd = () => {
             style={{ width: "100%", margin: "10px 0px" }}
             placeholder="Wishlist"
             onChange={handleWishlist}
+            value={
+              editMode && productToUpdate
+                ? productToUpdate.WishlistName
+                : product.WishlistName
+            }
           >
             {wishlists.map((el) => (
               <Option value={el.wishlist}>{el.wishlist}</Option>
@@ -116,14 +169,12 @@ const ProductAdd = () => {
             placeholder="Product Image"
             type="file"
             name="Image"
-            onChange={(e) =>
-              setProduct({ ...product, Image: e.target.files[0] })
-            }
+            onChange={handleChangeImage}
           />
         </Form.Item>
         <Form.Item>
           <Button type="primary" onClick={handleSubmit}>
-            Add
+            {editMode && productToUpdate ? "Edit" : "Add"}
           </Button>
         </Form.Item>
       </Form>

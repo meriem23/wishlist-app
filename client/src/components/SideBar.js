@@ -19,7 +19,7 @@ const SideBar = ({ type, setContent }) => {
     } else if (type === "wishlist") {
       dispatch(getWishlists());
     }
-  }, []);
+  }, [products]);
   const showModal = () => {
     setIsModalVisible(true);
   };
