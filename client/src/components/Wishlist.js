@@ -4,19 +4,20 @@ import { getWishlists, deleteWishlist } from "../actions/wishlistActions";
 import { getProducts } from "../actions/productActions";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Col, Row, Typography } from "antd";
+const { Title } = Typography;
 
 const ProductList = ({ content, type }) => {
   const { wishlists } = useSelector((state) => state.wish);
-  const { products } = useSelector((state) => state.product);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getWishlists());
     dispatch(getProducts());
+    console.log(wishlists);
   }, []);
   const deleteOneWishlist = (id) => {
     dispatch(deleteWishlist(id));
   };
-  const { Title } = Typography;
+
   return (
     <div>
       {content.wishlist ? (
@@ -37,17 +38,15 @@ const ProductList = ({ content, type }) => {
                   deleteOneWishlist(content._id);
                 }}
               />
-              <span>Delete</span>
             </div>
 
             <div style={{ color: "black" }}>
               <EditOutlined key="edit" />
-              <span>Edit</span>
             </div>
           </Row>
           <Row>
-            <Title>
-              {products.map((el) => (
+            {/* <Title>
+              {wishlists.map((el) => (
                 <div
                   style={{
                     border: "1px solid #eeeeee",
@@ -55,12 +54,12 @@ const ProductList = ({ content, type }) => {
                     width: "max-content",
                   }}
                 >
-                  <p>{el.Status}</p>
+                  <p>{el}</p>
                 </div>
               ))}
-            </Title>
+            </Title> */}
           </Row>
-          <Row>
+          {/* <Row>
             {products.map((el) => (
               <div
                 style={{
@@ -72,7 +71,8 @@ const ProductList = ({ content, type }) => {
                 <p>{el.Name}</p>
               </div>
             ))}
-          </Row>
+          </Row> */}
+          hello
         </div>
       ) : null}
     </div>

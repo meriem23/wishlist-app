@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DELETE_WISHLIST, GET_WISHLISTS } from "./types";
+import { DELETE_WISHLIST, EDIT_WISHLIST, GET_WISHLISTS } from "./types";
 import setToken from "../setToken";
 
 /* Get all wishlists*/
@@ -34,10 +34,15 @@ export const deleteWishlist = (id) => async (dispatch) => {
   dispatch(getWishlists());
 };
 
-// export const deleteContact = (id) => async (dispatch) => {
-//   await axios.delete(`/api/contacts/${id}`);
-//   dispatch({
-//     type: "DELETE",
-//   });
-//   dispatch(getContacts());
-// };
+/* Edit a product */
+export const editWishlist = (updateWish) => async (dispatch) => {
+  const res = await axios.put(
+    `${process.env.REACT_APP_API_URL}wishlist/${updateWish._id}`,
+    updateWish
+  );
+  await dispatch({
+    type: EDIT_WISHLIST,
+    payload: res.data,
+  });
+  dispatch(getWishlists());
+};

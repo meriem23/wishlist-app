@@ -67,8 +67,8 @@ router.post(
         Wishlist.findOne({ wishlist: WishlistName.trim() })
           .then((wish) => {
             wish.product.push(newProduct._id);
-            console.log(wish);
             wish.save();
+            console.log(wish);
           })
 
           .catch((err) => console.error(err));

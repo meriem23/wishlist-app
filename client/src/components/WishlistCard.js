@@ -27,15 +27,7 @@ const WishlistCard = ({ wishlist, products }) => {
           <EditOutlined key="edit" />
         </Col>
       </Row>
-      <Row>
-        <Col span={24}>
-          <Title>
-            {products.map((el) => (
-              <p>{el.WishlistName}</p>
-            ))}
-          </Title>
-        </Col>
-      </Row>
+      <Row>hello</Row>
     </div>
   );
 };

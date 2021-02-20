@@ -2,12 +2,12 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Modal, Form, Input, Typography } from "antd";
 import { HeartOutlined, PlusOutlined } from "@ant-design/icons";
-import { addWishlist } from "../actions/wishlistActions";
+import { addWishlist, editWishlist } from "../actions/wishlistActions";
+const { Text } = Typography;
 
 const WishlistModal = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [wishlist, setWishlist] = useState({ wishlist: "" });
-  const { Text } = Typography;
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const handleChange = (e) => {

@@ -1,8 +1,11 @@
-import { DELETE_WISHLIST, GET_WISHLISTS } from "../actions/types";
+import {
+  DELETE_WISHLIST,
+  EDIT_WISHLIST,
+  GET_WISHLISTS,
+} from "../actions/types";
 let initState = {
   wishlists: [],
   errors: null,
-  saved: null,
 };
 
 const wishlistReducer = (state = initState, { type, payload }) => {
@@ -18,6 +21,13 @@ const wishlistReducer = (state = initState, { type, payload }) => {
         ...state,
         wishlists: state.wishlists.filter((el) => el.i_d !== payload),
         errors: null,
+      };
+    case EDIT_WISHLIST:
+      return {
+        ...state,
+        wishlists: state.wishlists.map((el) =>
+          el._id === payload._id ? payload : el
+        ),
       };
     default:
       return state;
