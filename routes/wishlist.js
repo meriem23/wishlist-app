@@ -8,6 +8,7 @@ const { body, validationResult } = require("express-validator");
 /* Get all wishlist*/
 router.get("/", authMiddleware, (req, res) => {
   Wishlist.find({ user: req.user.id })
+    .populate("product")
     .sort({ date: -1 })
     .then((wishlists) => res.status(201).send(wishlists))
     .catch((err) => res.status(500).send({ msg: "Server error" }));

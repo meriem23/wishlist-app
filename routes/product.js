@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product");
+const Wishlist = require("../models/Wishlist");
 const authMiddleware = require("../middlewares/authMiddleware");
 const { body, validationResult } = require("express-validator");
 const multer = require("multer");
@@ -59,9 +60,20 @@ router.post(
       Image: path || null,
       user: req.user.id,
     });
+
     newProduct
       .save()
-      .then((product) => res.status(201).send(product))
+      .then((product) => {
+        Wishlist.findOne({ wishlist: WishlistName.trim() })
+          .then((wish) => {
+            wish.product.push(newProduct._id);
+            console.log(wish);
+            wish.save();
+          })
+
+          .catch((err) => console.error(err));
+        res.status(201).send(product);
+      })
       .catch((err) => res.status(500).send({ msg: "Server error." }));
   }
 );

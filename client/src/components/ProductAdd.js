@@ -24,8 +24,10 @@ const ProductAdd = ({ editMode, setEditMode, content }) => {
 
   useEffect(() => {
     if (editMode) {
+      console.log("hedhi");
       setProductToUpdate(content);
     } else return;
+    console.log("OKK");
   }, [editMode]);
 
   const [product, setProduct] = useState({
@@ -52,7 +54,7 @@ const ProductAdd = ({ editMode, setEditMode, content }) => {
     if (editMode) {
       setProductToUpdate({ ...productToUpdate, Status: value });
     } else {
-      setProduct({ ...product, WishlistName: value });
+      setProduct({ ...product, Status: value });
     }
   };
   const handleWishlist = (value) => {

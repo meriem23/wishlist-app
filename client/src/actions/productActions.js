@@ -22,6 +22,7 @@ export const addProduct = (info) => (dispatch) => {
     .post(`${process.env.REACT_APP_API_URL}product`, formData)
     .then((res) => dispatch(getProducts()))
     .catch((err) => {
+      console.log(err);
       alert("Error adding new product");
     });
 };
