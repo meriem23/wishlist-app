@@ -5,7 +5,7 @@ const ProductSchema = mongoose.Schema({
   WishlistName: String,
   Name: String,
   Description: String,
-  Price: Number,
+  Price: String,
   Image: {
     type: String,
     default:

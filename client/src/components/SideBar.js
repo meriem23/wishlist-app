@@ -26,7 +26,7 @@ const SideBar = ({ type, setContent }) => {
   return (
     <div>
       <Menu
-        style={{ width: 250, height: "80vh" }}
+        style={{ width: 200, height: "85vh" }}
         defaultSelectedKeys={["1"]}
         defaultOpenKeys={["sub1"]}
         onClick={showModal}
@@ -44,13 +44,11 @@ const SideBar = ({ type, setContent }) => {
           )}
         </Button>
         {type === "product"
-          ? products &&
-            products.map((el) => (
+          ? products.map((el) => (
               <Menu.Item onClick={() => setContent(el)}>{el.Name}</Menu.Item>
             ))
           : type === "wishlist"
-          ? wishlists &&
-            wishlists.map((el) => (
+          ? wishlists.map((el) => (
               <Menu.Item onClick={() => setContent(el)}>
                 {el.wishlist}
               </Menu.Item>

@@ -5,17 +5,29 @@ import { Card, Typography, Image } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const ProductCard = ({ content }) => {
-  const { Title, Text } = Typography;
+  const { Text } = Typography;
   const dispatch = useDispatch();
   const deleteOneProduct = (id) => {
     dispatch(deleteProduct(id));
   };
   return (
-    <div>
-      {content && (
+    <div className="cardStyle">
+      {content.Name ? (
         <Card
-          style={{ width: 300 }}
-          cover={<img alt={content.Name} src={content.Image} />}
+          style={{ width: 290 }}
+          hoverable={true}
+          cover={
+            <img
+              alt={content.Name}
+              src={content.Image}
+              style={{
+                width: " 100%",
+                height: "auto",
+                border: "1px solid #eeeeee",
+              }}
+            />
+          }
+          title={content.Name}
           actions={[
             <DeleteOutlined
               key="delete"
@@ -26,15 +38,26 @@ const ProductCard = ({ content }) => {
             <EditOutlined key="edit" />,
           ]}
         >
-          <Title level={3}>{content.Name}</Title>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <Text>{content.Price}</Text>
-            <Text>{content.Description}</Text>
-            <Text>{content.Status}</Text>
-            <Text>{content.WishlistName}</Text>
+            <Text>
+              <span>Price: </span> {content.Price}
+            </Text>
+            <Text>
+              <span>Description: </span>
+              {content.Description}
+            </Text>
+            <div>
+              <Text>
+                <span>Status: </span> {content.Status}
+              </Text>
+              <Text style={{ marginLeft: "15px" }}>
+                <span>Wishlist: </span>
+                {content.WishlistName}
+              </Text>
+            </div>
           </div>
         </Card>
-      )}
+      ) : null}
     </div>
   );
 };

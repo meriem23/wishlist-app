@@ -34,12 +34,12 @@ const WishlistModal = () => {
         Add Wishlist
       </Text>
       <Modal
-        title="Wishlist Name"
+        title="Add Wishlist"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
         okText="Add"
-        width="290px"
+        width="350px"
       >
         <Form
           form={form}
@@ -48,18 +48,11 @@ const WishlistModal = () => {
             remember: true,
           }}
         >
-          <Form.Item
-            name="wishlist"
-            rules={[
-              {
-                required: true,
-                message: "Please enter a wishlist name...",
-              },
-            ]}
-          >
+          <Form.Item name="wishlist">
             <Input
-              prefix={<HeartOutlined />}
-              placeholder="Wishlist Name"
+              prefix={<HeartOutlined style={{ color: "#4bb2f2" }} />}
+              style={{ width: "155%" }}
+              placeholder="Name"
               name="wishlist"
               onChange={handleChange}
             />

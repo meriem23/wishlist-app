@@ -49,36 +49,19 @@ const Login = () => {
           marginTop: 15,
         }}
       >
-        <Form.Item
-          name="email"
-          rules={[
-            {
-              required: true,
-              message: "Please enter your email...",
-              type: "email",
-            },
-          ]}
-        >
+        <Form.Item>
           <Input
-            prefix={<MailOutlined className="site-form-item-icon" />}
+            prefix={<MailOutlined style={{ color: "#4bb2f2" }} />}
             placeholder="Your email"
             name="email"
+            style={{ width: "100%", margin: "10px 0px" }}
             onChange={handleChange}
           />
-        </Form.Item>
-        <Form.Item
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: "Please input your password!",
-            },
-          ]}
-        >
           <Input.Password
-            prefix={<LockOutlined className="site-form-item-icon" />}
+            prefix={<LockOutlined style={{ color: "#4bb2f2" }} />}
             placeholder="Your password"
             name="password"
+            style={{ width: "100%", margin: "10px 0px" }}
             onChange={handleChange}
           />
         </Form.Item>

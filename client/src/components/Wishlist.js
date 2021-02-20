@@ -19,32 +19,62 @@ const ProductList = ({ content, type }) => {
   const { Title } = Typography;
   return (
     <div>
-      <Row>
-        <Col span={15}>
-          <Title size={1}>{content.wishlist}</Title>
-        </Col>
-        <Col span={9}>
-          <DeleteOutlined
-            key="delete"
-            onClick={() => {
-              deleteOneWishlist(content._id);
+      {content.wishlist ? (
+        <div>
+          <Row
+            gutter={200}
+            align="middle"
+            style={{
+              marginLeft: "5px",
             }}
-          />
-          <EditOutlined key="edit" />
-        </Col>
-      </Row>
-      <Row>
-        <Col span={24}>
-          <Title style={{ color: "red" }}>
+          >
+            <Title size={2}>{content.wishlist}</Title>
+
+            <div style={{ color: "red" }}>
+              <DeleteOutlined
+                key="delete"
+                onClick={() => {
+                  deleteOneWishlist(content._id);
+                }}
+              />
+              <span>Delete</span>
+            </div>
+
+            <div style={{ color: "black" }}>
+              <EditOutlined key="edit" />
+              <span>Edit</span>
+            </div>
+          </Row>
+          <Row>
+            <Title>
+              {products.map((el) => (
+                <div
+                  style={{
+                    border: "1px solid #eeeeee",
+                    marginLeft: "15px",
+                    width: "max-content",
+                  }}
+                >
+                  <p>{el.Status}</p>
+                </div>
+              ))}
+            </Title>
+          </Row>
+          <Row>
             {products.map((el) => (
-              <div>
-                <p>{el.WishlistName}</p>
-                <p>{el.Status}</p>
+              <div
+                style={{
+                  border: "1px solid #eeeeee",
+                  marginLeft: "15px",
+                  width: "max-content",
+                }}
+              >
+                <p>{el.Name}</p>
               </div>
             ))}
-          </Title>
-        </Col>
-      </Row>
+          </Row>
+        </div>
+      ) : null}
     </div>
   );
 };

@@ -43,7 +43,6 @@ const Dash = () => {
             >
               <Row>
                 <SideBar type={type} setContent={setContent} />
-
                 <Col>
                   <Wishlist content={content} type={type} />
                 </Col>
@@ -59,7 +58,7 @@ const Dash = () => {
                   {content === "add_new" ? (
                     <ProductAdd />
                   ) : (
-                    <ProductCard content={content} type={type} />
+                    <ProductCard content={content} />
                   )}
                 </Col>
               </Row>

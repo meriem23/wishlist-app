@@ -8,7 +8,7 @@ import {
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../actions/authActions";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 const Register = () => {
   const [user, setUser] = useState({
     fname: "",
@@ -34,7 +34,7 @@ const Register = () => {
   };
   const { Title } = Typography;
   return (
-    <div className="formStyle">
+    <div className="regFormStyle">
       <div className="formText">
         <Image
           width={35}
@@ -58,57 +58,31 @@ const Register = () => {
       >
         <Form.Item>
           <Input
-            prefix={<UserOutlined />}
+            prefix={<UserOutlined style={{ color: "#4bb2f2" }} />}
             placeholder="Your First Name"
             name="fname"
+            style={{ width: "100%", margin: "10px 0px" }}
             onChange={handleChange}
           />
-        </Form.Item>
-        <Form.Item
-          rules={[
-            {
-              required: true,
-              message: "Please enter your last name...",
-              type: "string",
-            },
-          ]}
-        >
           <Input
-            prefix={<TeamOutlined />}
+            prefix={<TeamOutlined style={{ color: "#4bb2f2" }} />}
             placeholder="Your Last Name"
             name="lname"
+            style={{ width: "100%", margin: "10px 0px" }}
             onChange={handleChange}
           />
-        </Form.Item>
-        <Form.Item
-          rules={[
-            {
-              required: true,
-              message: "Please enter your email...",
-              type: "email",
-            },
-          ]}
-        >
           <Input
-            prefix={<MailOutlined />}
+            prefix={<MailOutlined style={{ color: "#4bb2f2" }} />}
             placeholder="Your Email"
             name="email"
+            style={{ width: "100%", margin: "10px 0px" }}
             onChange={handleChange}
           />
-        </Form.Item>
-
-        <Form.Item
-          rules={[
-            {
-              required: true,
-              message: "Please input your password!",
-            },
-          ]}
-        >
           <Input.Password
-            prefix={<LockOutlined />}
+            prefix={<LockOutlined style={{ color: "#4bb2f2" }} />}
             placeholder="Your Password"
             name="password"
+            style={{ width: "100%", margin: "10px 0px" }}
             onChange={handleChange}
           />
         </Form.Item>
@@ -118,6 +92,9 @@ const Register = () => {
           </Button>
         </Form.Item>
       </Form>
+      <Title level={5}>
+        Already have an account? <Link to="/">Login now!</Link>
+      </Title>
     </div>
   );
 };

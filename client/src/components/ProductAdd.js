@@ -5,7 +5,6 @@ import {
   MoneyCollectOutlined,
   FileImageOutlined,
   FileTextOutlined,
-  UploadOutlined,
   IdcardOutlined,
   FormOutlined,
   PictureOutlined,
@@ -43,17 +42,17 @@ const ProductAdd = () => {
   let info = { Status, ...product, WishlistName };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addProduct(info, file));
+    dispatch(addProduct(info));
   };
   return (
-    <div>
+    <div className="addFormStyle">
       <div className="formText">
-        <Image
+        {/* <Image
           width={35}
           preview={false}
           src="./wishlist.png"
           alt="wishlist logo"
-        />
+        /> */}
         <Title level={3}>Add Product</Title>
       </div>
       <Form
@@ -67,62 +66,42 @@ const ProductAdd = () => {
         }}
         initialValues={{ remember: false }}
       >
-        {/* <div>
-          <label htmlFor="">Upload Image</label>
-          <input
-            type="file"
-            name="Image"
-            onChange={(e) => setFile({ Image: e.target.files[0] })}
-          />
-        </div> */}
         <Form.Item rules={[{ required: true }]}>
           <Input
-            prefix={<IdcardOutlined />}
-            placeholder="Product Name"
+            prefix={<IdcardOutlined style={{ color: "#4bb2f2" }} />}
+            style={{ width: "100%", margin: "10px 0px" }}
+            placeholder="Name"
             name="Name"
             onChange={handleChange}
           />
-        </Form.Item>
-        <Form.Item rules={[{ required: true }]}>
           <Input
-            prefix={<MoneyCollectOutlined />}
-            placeholder="Product Price"
+            prefix={<MoneyCollectOutlined style={{ color: "#4bb2f2" }} />}
+            style={{ width: "100%", margin: "10px 0px" }}
+            placeholder="Price"
             name="Price"
             onChange={handleChange}
-            type="number"
           />
-        </Form.Item>
-        <Form.Item rules={[{ required: true }]}>
+
           <Input
-            prefix={<FileTextOutlined />}
-            placeholder="Product Description"
+            prefix={<FileTextOutlined style={{ color: "#4bb2f2" }} />}
+            style={{ width: "100%", margin: "10px 0px" }}
+            placeholder="Description"
             name="Description"
             onChange={handleChange}
           />
-        </Form.Item>
-        <Form.Item rules={[{ required: true }]}>
-          <Input
-            prefix={<PictureOutlined />}
-            placeholder="Product Image"
-            type="file"
-            name="Image"
-            onChange={(e) => setFile({ Image: e.target.files[0] })}
-          />
-        </Form.Item>
-        <Form.Item rules={[{ required: true }]}>
           <Select
-            suffixIcon={<FormOutlined />}
-            placeholder="Product Status"
+            suffixIcon={<FormOutlined style={{ color: "#4bb2f2" }} />}
+            style={{ width: "100%", margin: "10px 0px" }}
+            placeholder="Status"
             onChange={handleStatus}
           >
             <Option value="To Buy">To Buy</Option>
             <Option value="Bought">Bought</Option>
           </Select>
-        </Form.Item>
-        <Form.Item rules={[{ required: true }]}>
           <Select
-            suffixIcon={<FormOutlined />}
-            placeholder="Choose Wishlist"
+            suffixIcon={<FormOutlined style={{ color: "#4bb2f2" }} />}
+            style={{ width: "100%", margin: "10px 0px" }}
+            placeholder="Wishlist"
             onChange={handleWishlist}
           >
             {wishlists.map((el) => (
@@ -130,6 +109,16 @@ const ProductAdd = () => {
             ))}
           </Select>
         </Form.Item>
+
+        {/* <Form.Item rules={[{ required: true }]}>
+          <Input
+            prefix={<FileImageOutlined />}
+            placeholder="Product Image"
+            type="file"
+            name="Image"
+            onChange={(e) => setFile({ Image: e.target.files[0] })}
+          />
+        </Form.Item> */}
         <Form.Item>
           <Button type="primary" onClick={handleSubmit}>
             Add

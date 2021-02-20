@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Avatar, Menu, Dropdown, Button } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+import { Avatar, Menu, Dropdown } from "antd";
+import { DownOutlined, LogoutOutlined } from "@ant-design/icons";
 import { logoutUser } from "../actions/authActions";
 
 const UserAvatar = () => {
@@ -9,9 +9,14 @@ const UserAvatar = () => {
 
   const menu = (
     <Menu>
-      <Menu.Item>
-        <p onClick={() => dispatch(logoutUser())}>{`${user.fname}, logout?`}</p>
-      </Menu.Item>
+      <Menu.Item
+        icon={
+          <LogoutOutlined
+            style={{ color: "#4bb2f2" }}
+            onClick={() => dispatch(logoutUser())}
+          />
+        }
+      ></Menu.Item>
     </Menu>
   );
   return (
