@@ -21,6 +21,10 @@ app.use("/api/login", require("./routes/login"));
 app.use("/api/product", require("./routes/product"));
 app.use("/api/wishlist", require("./routes/wishlist"));
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 // Listening to the server 5000
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server is running on port ${port}`));
