@@ -9,7 +9,7 @@ const ProductSchema = mongoose.Schema({
   Price: String,
   Image: String,
   Status: String,
-  date: { type: Date, default: Date.now },
+  DateCreation: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model("product", ProductSchema);

@@ -6,13 +6,15 @@ const app = express();
 
 //Requiring variables
 require("dotenv").config();
+
 // Connecting to the database
 connectDB();
-// Define middlewares
+
+// Define middlewares and upload
 app.use(express.json());
 app.use(cors());
-
 app.use("/uploads", express.static(__dirname + "/uploads"));
+
 // Define routes
 app.use("/api/register", require("./routes/register"));
 app.use("/api/login", require("./routes/login"));

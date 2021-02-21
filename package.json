@@ -1,7 +1,7 @@
 {
   "name": "wishlist-app",
   "version": "1.0.0",
-  "description": "this is an app for the technical test for AstroLab",
+  "description": "this App is a technical test for AstroLab",
   "main": "server.js",
   "scripts": {
     "server": "nodemon server",

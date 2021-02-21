@@ -4,7 +4,7 @@ const WishlistSchema = mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
   product: [{ type: mongoose.Schema.Types.ObjectId, ref: "product" }],
   wishlist: String,
-  date: { type: Date, default: Date.now },
+  DateCreation: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model("wishlist", WishlistSchema);
