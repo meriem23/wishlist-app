@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct } from "../actions/productActions";
-import { Card, Typography, Image } from "antd";
+import { Card, Typography } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { motion, AnimatePresence } from "framer-motion";
 import ProductAdd from "./ProductAdd";
+const { Text } = Typography;
 
 const ProductCard = ({ content, setContent }) => {
-  const { Text } = Typography;
   const { products } = useSelector((state) => state.product);
   const [editMode, setEditMode] = useState(false);
-
   const dispatch = useDispatch();
   const deleteOneProduct = (id) => {
     dispatch(deleteProduct(id));

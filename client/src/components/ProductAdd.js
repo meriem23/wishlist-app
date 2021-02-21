@@ -7,12 +7,11 @@ import {
   FileTextOutlined,
   IdcardOutlined,
   FormOutlined,
-  PictureOutlined,
 } from "@ant-design/icons";
 import { addProduct, editProduct } from "../actions/productActions";
 import { getWishlists } from "../actions/wishlistActions";
-
 const { Option } = Select;
+const { Title } = Typography;
 
 const ProductAdd = ({ editMode, setEditMode, content }) => {
   const [productToUpdate, setProductToUpdate] = useState(null);
@@ -24,10 +23,8 @@ const ProductAdd = ({ editMode, setEditMode, content }) => {
 
   useEffect(() => {
     if (editMode) {
-      console.log("hedhi");
       setProductToUpdate(content);
     } else return;
-    console.log("OKK");
   }, [editMode]);
 
   const [product, setProduct] = useState({
@@ -38,7 +35,6 @@ const ProductAdd = ({ editMode, setEditMode, content }) => {
   });
   const [Status, setStatus] = useState(null);
   const [WishlistName, setWishlist] = useState(null);
-  const { Title } = Typography;
   const [form] = Form.useForm();
   const handleChange = (e) => {
     if (editMode) {
@@ -163,9 +159,6 @@ const ProductAdd = ({ editMode, setEditMode, content }) => {
               <Option value={el.wishlist}>{el.wishlist}</Option>
             ))}
           </Select>
-        </Form.Item>
-
-        <Form.Item rules={[{ required: true }]}>
           <Input
             prefix={<FileImageOutlined />}
             placeholder="Product Image"

@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { Form, Input, Button, Typography, Image } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { loginUser } from "../actions/authActions";
+const { Title } = Typography;
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -25,7 +26,7 @@ const Login = () => {
       history.push("/home");
     }
   }, [isAuth]);
-  const { Title } = Typography;
+
   return (
     <div className="formStyle">
       <div className="formText">

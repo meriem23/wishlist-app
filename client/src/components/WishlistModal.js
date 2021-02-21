@@ -1,30 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Modal, Form, Input, Typography } from "antd";
 import { HeartOutlined, PlusOutlined } from "@ant-design/icons";
 import { addWishlist, editWishlist } from "../actions/wishlistActions";
 const { Text } = Typography;
 
-const WishlistModal = () => {
+const WishlistModal = ({ editMode, setEditMode, content }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [wishlist, setWishlist] = useState({ wishlist: "" });
+  const [wishToUpdate, setWishToUpdate] = useState(null);
   const [form] = Form.useForm();
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (editMode) {
+      setWishToUpdate(content);
+      setIsModalVisible(true);
+    } else return;
+  }, [editMode]);
   const handleChange = (e) => {
-    setWishlist({ ...wishlist, [e.target.name]: e.target.value });
+    if (editMode) {
+      setWishToUpdate({
+        ...wishToUpdate,
+        [e.target.name]: e.target.value,
+      });
+    } else {
+      setWishlist({ ...wishlist, [e.target.name]: e.target.value });
+    }
   };
   const showModal = () => {
     setIsModalVisible(true);
   };
   const handleOk = () => {
     setIsModalVisible(false);
-    dispatch(addWishlist(wishlist));
+    if (editMode) {
+      dispatch(editWishlist(wishToUpdate));
+      setEditMode(false);
+      console.log("edit mode on");
+    } else {
+      dispatch(addWishlist(wishlist));
+    }
     form.resetFields();
   };
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  //
+
   return (
     <div>
       <Text onClick={showModal} className="textStyle">
@@ -38,7 +58,7 @@ const WishlistModal = () => {
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
-        okText="Add"
+        okText={editMode && wishToUpdate ? "Edit" : "Add"}
         width="350px"
       >
         <Form
@@ -55,6 +75,11 @@ const WishlistModal = () => {
               placeholder="Name"
               name="wishlist"
               onChange={handleChange}
+              value={
+                editMode && wishToUpdate
+                  ? wishToUpdate.wishlist
+                  : wishlist.wishlist
+              }
             />
           </Form.Item>
         </Form>

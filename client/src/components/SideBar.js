@@ -5,14 +5,14 @@ import { PlusOutlined } from "@ant-design/icons";
 import { getProducts } from "../actions/productActions";
 import { getWishlists } from "../actions/wishlistActions";
 import WishlistModal from "./WishlistModal";
-import ProductAdd from "./ProductAdd";
+const { Text } = Typography;
 
 const SideBar = ({ type, setContent }) => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.product);
   const { wishlists } = useSelector((state) => state.wish);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const { Text } = Typography;
+
   useEffect(() => {
     if (type === "product") {
       dispatch(getProducts());

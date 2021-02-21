@@ -3,14 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { Row, Col, Tabs } from "antd";
 import { loadUser } from "../actions/authActions";
 import UserAvatar from "../components/UserAvatar";
-import WishlistModal from "../components/WishlistModal";
 import ProductAdd from "../components/ProductAdd";
-import ProductList from "../components/ProductList";
 import Wishlist from "../components/Wishlist";
 import SideBar from "../components/SideBar";
 import ProductCard from "../components/ProductCard";
+const { TabPane } = Tabs;
 
-const Dash = () => {
+const Home = () => {
   const { user } = useSelector((state) => state.auth);
   const [content, setContent] = useState("add_new");
   const [type, setType] = useState("wishlist");
@@ -18,8 +17,6 @@ const Dash = () => {
   useEffect(() => {
     dispatch(loadUser());
   }, []);
-  const { TabPane } = Tabs;
-
   const changeContent = (key) => {
     if (key === "1") {
       setType("wishlist");
@@ -44,7 +41,7 @@ const Dash = () => {
               <Row>
                 <SideBar type={type} setContent={setContent} />
                 <Col>
-                  <Wishlist content={content} type={type} />
+                  <Wishlist content={content} setContent={setContent} />
                 </Col>
               </Row>
             </TabPane>
@@ -70,4 +67,4 @@ const Dash = () => {
   ) : null;
 };
 
-export default Dash;
+export default Home;

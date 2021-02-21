@@ -1,24 +1,34 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getWishlists, deleteWishlist } from "../actions/wishlistActions";
+import {
+  getWishlists,
+  deleteWishlist,
+  editWishlist,
+} from "../actions/wishlistActions";
+import WishlistModal from "./WishlistModal";
 import { getProducts } from "../actions/productActions";
+import { motion, AnimatePresence } from "framer-motion";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Col, Row, Typography } from "antd";
 const { Title } = Typography;
 
-const ProductList = ({ content, type }) => {
+const ProductList = ({ content, setContent }) => {
   const { wishlists } = useSelector((state) => state.wish);
+  const [editMode, setEditMode] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getWishlists());
     dispatch(getProducts());
-    console.log(wishlists);
   }, []);
   const deleteOneWishlist = (id) => {
     dispatch(deleteWishlist(id));
+    if (wishlists.length === 1) {
+      setContent("add_new");
+    } else {
+      setContent(wishlists[0]);
+    }
   };
-
-  return (
+  return !editMode ? (
     <div>
       {content.wishlist ? (
         <div>
@@ -39,43 +49,27 @@ const ProductList = ({ content, type }) => {
                 }}
               />
             </div>
-
             <div style={{ color: "black" }}>
-              <EditOutlined key="edit" />
+              <EditOutlined key="edit" onClick={() => setEditMode(true)} />
             </div>
           </Row>
-          <Row>
-            {/* <Title>
-              {wishlists.map((el) => (
-                <div
-                  style={{
-                    border: "1px solid #eeeeee",
-                    marginLeft: "15px",
-                    width: "max-content",
-                  }}
-                >
-                  <p>{el}</p>
-                </div>
-              ))}
-            </Title> */}
-          </Row>
-          {/* <Row>
-            {products.map((el) => (
-              <div
-                style={{
-                  border: "1px solid #eeeeee",
-                  marginLeft: "15px",
-                  width: "max-content",
-                }}
-              >
-                <p>{el.Name}</p>
-              </div>
-            ))}
-          </Row> */}
-          hello
         </div>
       ) : null}
     </div>
+  ) : (
+    <AnimatePresence exitBeforeEnter={false}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <WishlistModal
+          editMode={editMode}
+          setEditMode={setEditMode}
+          content={content}
+        />
+      </motion.div>
+    </AnimatePresence>
   );
 };
 

@@ -9,6 +9,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../actions/authActions";
 import { useHistory, Link } from "react-router-dom";
+const { Title } = Typography;
+
 const Register = () => {
   const [user, setUser] = useState({
     fname: "",
@@ -32,7 +34,6 @@ const Register = () => {
     e.preventDefault();
     dispatch(registerUser(user));
   };
-  const { Title } = Typography;
   return (
     <div className="regFormStyle">
       <div className="formText">
@@ -93,7 +94,7 @@ const Register = () => {
         </Form.Item>
       </Form>
       <Title level={5}>
-        Already have an account? <Link to="/">Login now!</Link>
+        Already have an account? <Link to="/">Sign in now!</Link>
       </Title>
     </div>
   );
