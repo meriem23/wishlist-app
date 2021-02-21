@@ -1,101 +1,130 @@
 /* Basic CSS Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@media only screen and (min-width: 992px) {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .formStyle {
+    border: 2px solid #eeeeee;
+    width: fit-content;
+    transform: translate(150%, 50%);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .regFormStyle {
+    border: 2px solid #eeeeee;
+    width: fit-content;
+    transform: translate(150%, 30%);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .formText {
+    display: flex;
+    align-items: center;
+  }
+  Form {
+    display: flex;
+    align-items: center;
+  }
+  button {
+    display: flex;
+    align-items: center;
+  }
+  .btn {
+    background-color: #4bb2f2;
+    height: fit-content;
+  }
+  .btn:hover {
+    background-color: #4bb2f2;
+  }
+  .avatarHover {
+    display: flex;
+    align-items: baseline;
+    margin: 5px 15px;
+  }
+  .textStyle {
+    color: #4bb2f2;
+    font-weight: 400;
+  }
+  .listStyle {
+    font-weight: 500;
+    color: #4bb2f2;
+  }
+  .add_btn {
+    width: 90%;
+    margin: 5px;
+    height: 40px;
+    border: 1px solid #4bb2f2;
+    /* color: #4bb2f2; */
+  }
+  .formAddStyle {
+    border: 1px solid #4bb2f2;
+    width: fit-content;
+    transform: translateX(110%);
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .iconStyle {
+    margin-left: 15px !important;
+  }
+  .cardStyle {
+    transform: translateX(120%);
+  }
+  span {
+    font-weight: 500;
+  }
+  .addFormStyle {
+    border: 2px solid #eeee;
+    width: fit-content;
+    transform: translate(100%, 5%);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .prodStyle {
+    transform: translateX(45%);
+  }
 }
-/* Login & register Page */
-.formStyle {
-  border: 2px solid #eeeeee;
-  width: fit-content;
-  transform: translate(150%, 50%);
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+/* For phones */
+@media only screen and (max-width: 600px) {
+  .addFormStyle,
+  .formAddStyle,
+  .formStyle,
+  .regformStyle {
+    transform: translate(10%);
+    width: 100%;
+  }
 }
-.regFormStyle {
-  border: 2px solid #eeeeee;
-  width: fit-content;
-  transform: translate(150%, 30%);
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.formText {
-  display: flex;
-  align-items: center;
-}
-Form {
-  display: flex;
-  align-items: center;
-}
-button {
-  display: flex;
-  align-items: center;
-}
-.btn {
-  background-color: #4bb2f2;
-  height: fit-content;
-}
-.btn:hover {
-  background-color: #4bb2f2;
-}
-.avatarHover {
-  display: flex;
-  align-items: baseline;
-  margin: 5px 15px;
-}
-.textStyle {
-  color: #4bb2f2;
-  font-weight: 400;
-}
-.listStyle {
-  font-weight: 500;
-  color: #4bb2f2;
-}
-.add_btn {
-  width: 90%;
-  margin: 5px;
-  height: 40px;
-  border: 1px solid #4bb2f2;
-  /* color: #4bb2f2; */
-}
-.formAddStyle {
-  border: 1px solid #4bb2f2;
-  width: fit-content;
-  transform: translateX(110%);
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.iconStyle {
-  margin-left: 15px !important;
-}
-.cardStyle {
-  transform: translateX(120%);
-}
-span {
-  font-weight: 500;
-}
-.addFormStyle {
-  border: 2px solid #eeee;
-  width: fit-content;
-  transform: translate(100%, 5%);
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.prodStyle {
-  transform: translateX(45%);
-}
-/* @media screen and (max-widht) {
 
-} */
+/* For tablets */
+@media only screen and (min-width: 600px) {
+  .addFormStyle,
+  .formAddStyle,
+  .formStyle,
+  .regformStyle {
+    transform: translateX(50%);
+  }
+}
+
+/* For extra large screens */
+@media only screen and (min-width: 1200px) {
+  .addFormStyle,
+  .formAddStyle,
+  .formStyle,
+  .regformStyle {
+    transform: translate(20%, 20%);
+    width: 100%;
+  }
+}
