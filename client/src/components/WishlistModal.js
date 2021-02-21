@@ -47,12 +47,14 @@ const WishlistModal = ({ editMode, setEditMode, content }) => {
 
   return (
     <div>
-      <Text onClick={showModal} className="textStyle">
-        <PlusOutlined
-          style={{ color: "#4bb2f2", marginRight: 20, fontSize: 15 }}
-        />
-        Add Wishlist
-      </Text>
+      {!editMode ? (
+        <Text onClick={showModal} className="textStyle">
+          <PlusOutlined
+            style={{ color: "#4bb2f2", marginRight: 20, fontSize: 15 }}
+          />
+          Add Wishlist
+        </Text>
+      ) : null}
       <Modal
         title="Add Wishlist"
         visible={isModalVisible}

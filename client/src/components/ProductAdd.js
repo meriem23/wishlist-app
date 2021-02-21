@@ -160,7 +160,7 @@ const ProductAdd = ({ editMode, setEditMode, content }) => {
             ))}
           </Select>
           <Input
-            prefix={<FileImageOutlined />}
+            prefix={<FileImageOutlined style={{ color: "#4bb2f2" }} />}
             placeholder="Product Image"
             type="file"
             name="Image"

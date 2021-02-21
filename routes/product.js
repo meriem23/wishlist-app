@@ -68,7 +68,6 @@ router.post(
           .then((wish) => {
             wish.product.push(newProduct._id);
             wish.save();
-            console.log(wish);
           })
 
           .catch((err) => console.error(err));

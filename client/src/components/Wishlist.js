@@ -1,57 +1,96 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getWishlists,
-  deleteWishlist,
-  editWishlist,
-} from "../actions/wishlistActions";
+import { getWishlists, deleteWishlist } from "../actions/wishlistActions";
 import WishlistModal from "./WishlistModal";
 import { getProducts } from "../actions/productActions";
 import { motion, AnimatePresence } from "framer-motion";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Col, Row, Typography } from "antd";
+import { Row, Typography } from "antd";
 const { Title } = Typography;
 
 const ProductList = ({ content, setContent }) => {
   const { wishlists } = useSelector((state) => state.wish);
+  const { products } = useSelector((state) => state.product);
   const [editMode, setEditMode] = useState(false);
+  const [type, setType] = useState(null);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getWishlists());
     dispatch(getProducts());
   }, []);
   const deleteOneWishlist = (id) => {
     dispatch(deleteWishlist(id));
-    if (wishlists.length === 1) {
-      setContent("add_new");
-    } else {
-      setContent(wishlists[0]);
-    }
   };
+  var stat = wishlists.map(({ product }) =>
+    product.map(({ WishlistName }) => WishlistName)
+  );
+
+  // var tat = wishlists.forEach(({ product }) => {
+  //   product.map(({ WishlistName }) => WishlistName);
+  // });
+
   return !editMode ? (
-    <div>
+    <div className="prodStyle">
       {content.wishlist ? (
         <div>
           <Row
             gutter={200}
             align="middle"
             style={{
-              marginLeft: "5px",
+              marginLeft: 50,
             }}
           >
             <Title size={2}>{content.wishlist}</Title>
+            <div style={{ display: "flex", marginLeft: 300 }}>
+              <p style={{ color: "red" }}>
+                <DeleteOutlined
+                  key="delete"
+                  onClick={() => {
+                    deleteOneWishlist(content._id);
+                  }}
+                />
+              </p>
+              <p style={{ color: "black" }}>
+                <EditOutlined key="edit" onClick={() => setEditMode(true)} />
+              </p>
+            </div>
+          </Row>
+          <Row>
+            {/* <Menu
+              style={{
+                height: "85vh",
+                border: "1px solid #eeee",
+                width: 550,
+                height: 50,
+                marginLeft: 50,
+              }}
+              defaultSelectedKeys={["1"]}
+              defaultOpenKeys={["sub1"]}
+              mode="horizontal"
+            >
+              <Menu.Item>To Buy</Menu.Item>
 
-            <div style={{ color: "red" }}>
-              <DeleteOutlined
-                key="delete"
-                onClick={() => {
-                  deleteOneWishlist(content._id);
-                }}
-              />
-            </div>
-            <div style={{ color: "black" }}>
-              <EditOutlined key="edit" onClick={() => setEditMode(true)} />
-            </div>
+              <Menu.Item>Bought</Menu.Item>
+            </Menu> */}
+            {/* {content.wishlist === k ? h : h} */}
+            {console.log(stat)}
+            {/* {type === "To Buy" ? <p>Hello</p> : <p>Bye</p>}
+            <p>
+              {wishlists.map(({ product }) =>
+                product.map(({ Status }) => <p>{Status}</p>)
+              )}
+            </p>
+            <p>
+              {wishlists.map(({ product }) =>
+                product.map(({ WishlistName }) => <p>{WishlistName}</p>)
+              )}
+            </p>
+            <p>
+              {wishlists.map(({ product }) =>
+                product.map(({ Price }) => <p>{Price}</p>)
+              )}
+            </p> */}
           </Row>
         </div>
       ) : null}

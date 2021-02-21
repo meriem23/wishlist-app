@@ -93,3 +93,9 @@ span {
   justify-content: center;
   align-items: center;
 }
+.prodStyle {
+  transform: translateX(45%);
+}
+/* @media screen and (max-widht) {
+
+} */
