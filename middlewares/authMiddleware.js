@@ -4,7 +4,11 @@ const authMiddleware = (req, res, next) => {
   let token = req.header("x-auth-token");
 
   if (!token) {
-    return res.status(401).json({ msg: "You are not an authorized user" });
+    return res
+      .status(401)
+      .json({
+        msg: "You are not an authorized user, create an account first!",
+      });
   }
   jwt.verify(token, process.env.SECRET_KEY, (err, payload) => {
     if (err) {
