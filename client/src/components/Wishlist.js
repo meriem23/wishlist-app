@@ -5,8 +5,9 @@ import WishlistModal from "./WishlistModal";
 import { getProducts } from "../actions/productActions";
 import { motion, AnimatePresence } from "framer-motion";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Row, Typography } from "antd";
-const { Title } = Typography;
+import { Row, Typography, Col, Tabs } from "antd";
+const { Title, Text } = Typography;
+const { TabPane } = Tabs;
 
 const ProductList = ({ content, setContent }) => {
   const { wishlists } = useSelector((state) => state.wish);
@@ -25,7 +26,7 @@ const ProductList = ({ content, setContent }) => {
 
   return !editMode ? (
     <div className="prodStyle">
-      {content.wishlist ? (
+      {content ? (
         <div>
           <Row
             gutter={200}
@@ -50,22 +51,36 @@ const ProductList = ({ content, setContent }) => {
             </div>
           </Row>
           <Row>
-            {/* <Menu
-              style={{
-                height: "85vh",
-                border: "1px solid #eeee",
-                width: 550,
-                height: 50,
-                marginLeft: 50,
-              }}
-              defaultSelectedKeys={["1"]}
-              defaultOpenKeys={["sub1"]}
-              mode="horizontal"
-            >
-              <Menu.Item>To Buy</Menu.Item>
-
-              <Menu.Item>Bought</Menu.Item>
-            </Menu> */}
+            <Tabs defaultActiveKey="1" className="tabStyle">
+              <TabPane tab="To Buy" key="1">
+                {content.product &&
+                  content.product
+                    .filter((el) => "To Buy" === el.Status)
+                    .map((el) => (
+                      <div
+                        style={{
+                          display: "flex",
+                        }}
+                      >
+                        <Text> Product Name: {el.Name}</Text>
+                      </div>
+                    ))}
+              </TabPane>
+              <TabPane tab="Bought" key="2">
+                {content.product &&
+                  content.product
+                    .filter((el) => "Bought" === el.Status)
+                    .map((el) => (
+                      <div
+                        style={{
+                          display: "flex",
+                        }}
+                      >
+                        <Text> Product Name: {el.Name}</Text>
+                      </div>
+                    ))}
+              </TabPane>
+            </Tabs>
           </Row>
         </div>
       ) : null}
