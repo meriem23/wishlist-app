@@ -12,6 +12,7 @@ email : user2@gmail.com / password : 456789
 
 💻 Technologies that I used :
 
+
 💿 Front-End : With React.js
 
 - React Router DOM : It allows the app to navigate between different components, changing the browser URL, modifying the browser history, and keeping the UI state in sync.
