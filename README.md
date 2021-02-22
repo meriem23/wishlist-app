@@ -1,6 +1,7 @@
 🪐🔬 Welcome to this README section of the app:
 To start the project run the commande : npm run dev
 There is already 2 users registred in the database:
+
 User 1 :
 user1@gmail.com / password : 123456
 
