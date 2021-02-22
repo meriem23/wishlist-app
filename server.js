@@ -3,8 +3,6 @@ const cors = require("cors");
 const path = require("path");
 const connectDB = require("./config/connectDB");
 const app = express();
-const path = require("path");
-const { buildSanitizeFunction } = require("express-validator");
 //Requiring variables
 require("dotenv").config();
 
