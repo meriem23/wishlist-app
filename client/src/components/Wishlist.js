@@ -22,13 +22,6 @@ const ProductList = ({ content, setContent }) => {
   const deleteOneWishlist = (id) => {
     dispatch(deleteWishlist(id));
   };
-  var stat = wishlists.map(({ product }) =>
-    product.map(({ WishlistName }) => WishlistName)
-  );
-
-  // var tat = wishlists.forEach(({ product }) => {
-  //   product.map(({ WishlistName }) => WishlistName);
-  // });
 
   return !editMode ? (
     <div className="prodStyle">
@@ -73,24 +66,6 @@ const ProductList = ({ content, setContent }) => {
 
               <Menu.Item>Bought</Menu.Item>
             </Menu> */}
-            {/* {content.wishlist === k ? h : h} */}
-            {console.log(stat)}
-            {/* {type === "To Buy" ? <p>Hello</p> : <p>Bye</p>}
-            <p>
-              {wishlists.map(({ product }) =>
-                product.map(({ Status }) => <p>{Status}</p>)
-              )}
-            </p>
-            <p>
-              {wishlists.map(({ product }) =>
-                product.map(({ WishlistName }) => <p>{WishlistName}</p>)
-              )}
-            </p>
-            <p>
-              {wishlists.map(({ product }) =>
-                product.map(({ Price }) => <p>{Price}</p>)
-              )}
-            </p> */}
           </Row>
         </div>
       ) : null}
