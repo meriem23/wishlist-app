@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Form, Input, Button, Typography, Image, Select, Upload } from "antd";
+import { Form, Input, Button, Typography, Select } from "antd";
 import {
   MoneyCollectOutlined,
   FileImageOutlined,
   FileTextOutlined,
   IdcardOutlined,
   FormOutlined,
+  DownloadOutlined,
 } from "@ant-design/icons";
 import { addProduct, editProduct } from "../actions/productActions";
 import { getWishlists } from "../actions/wishlistActions";
@@ -78,26 +79,49 @@ const ProductAdd = ({ editMode, setEditMode, content }) => {
     }
   };
 
+  const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+  };
+
   return (
-    <div className="addFormStyle">
-      <div className="formText">
-        <Title level={3}>Add Product</Title>
+    <div className="add_form_style">
+      <div className="form_text">
+        <div className="blue_line"></div>
+        <Title
+          level={3}
+          // style={{
+          //   color: "#00468c",
+          //   textTransform: "upperCase",
+          //   fontSize: 24,
+          //   fontWeight: 700,
+          //   marginBottom: 0,
+          // }}
+        >
+          Add Product
+        </Title>
+        <div className="blue_line"></div>
       </div>
+
       <Form
         form={form}
         style={{
           width: 310,
+          // justifyContent: "center",
           display: "flex",
-          justifyContent: "center",
           flexDirection: "column",
-          marginTop: 15,
+          // marginTop: 15,
+          // fontSize: "20 !important",
         }}
         initialValues={{ remember: false }}
+        {...layout}
+        className="add_product_form"
       >
-        <Form.Item rules={[{ required: true }]}>
+        <Form.Item className="form_item" name="name">
           <Input
+            className="add_product_input"
             prefix={<IdcardOutlined style={{ color: "#4bb2f2" }} />}
-            style={{ width: "100%", margin: "10px 0px" }}
+            style={{ width: "100%" }}
             placeholder="Name"
             name="Name"
             onChange={handleChange}
@@ -105,9 +129,12 @@ const ProductAdd = ({ editMode, setEditMode, content }) => {
               editMode && productToUpdate ? productToUpdate.Name : product.Name
             }
           />
+        </Form.Item>
+        <Form.Item className="form_item" name="price">
           <Input
+            className="add_product_input"
             prefix={<MoneyCollectOutlined style={{ color: "#4bb2f2" }} />}
-            style={{ width: "100%", margin: "10px 0px" }}
+            style={{ width: "100%" }}
             placeholder="Price"
             name="Price"
             onChange={handleChange}
@@ -117,10 +144,12 @@ const ProductAdd = ({ editMode, setEditMode, content }) => {
                 : product.Price
             }
           />
-
+        </Form.Item>
+        <Form.Item className="form_item" name="description">
           <Input
+            className="add_product_input"
             prefix={<FileTextOutlined style={{ color: "#4bb2f2" }} />}
-            style={{ width: "100%", margin: "10px 0px" }}
+            style={{ width: "100%" }}
             placeholder="Description"
             name="Description"
             onChange={handleChange}
@@ -130,9 +159,12 @@ const ProductAdd = ({ editMode, setEditMode, content }) => {
                 : product.Description
             }
           />
+        </Form.Item>
+        <Form.Item className="form_item" name="status">
           <Select
+            className="add_product_input"
             suffixIcon={<FormOutlined style={{ color: "#4bb2f2" }} />}
-            style={{ width: "100%", margin: "10px 0px" }}
+            style={{ width: "100%" }}
             placeholder="Status"
             onChange={handleStatus}
             value={
@@ -144,9 +176,12 @@ const ProductAdd = ({ editMode, setEditMode, content }) => {
             <Option value="To Buy">To Buy</Option>
             <Option value="Bought">Bought</Option>
           </Select>
+        </Form.Item>
+        <Form.Item className="form_item" name="wishlist">
           <Select
+            className="add_product_input"
             suffixIcon={<FormOutlined style={{ color: "#4bb2f2" }} />}
-            style={{ width: "100%", margin: "10px 0px" }}
+            style={{ width: "100%" }}
             placeholder="Wishlist"
             onChange={handleWishlist}
             value={
@@ -159,16 +194,26 @@ const ProductAdd = ({ editMode, setEditMode, content }) => {
               <Option value={el.wishlist}>{el.wishlist}</Option>
             ))}
           </Select>
+        </Form.Item>
+        <Form.Item
+          className="form_item form_item_label_img"
+          label="Add Image"
+          name="image"
+        >
           <Input
+            // className="add_product_input add_product_input_img"
             prefix={<FileImageOutlined style={{ color: "#4bb2f2" }} />}
-            placeholder="Product Image"
             type="file"
             name="Image"
             onChange={handleChangeImage}
           />
         </Form.Item>
-        <Form.Item>
-          <Button type="primary" onClick={handleSubmit}>
+        <Form.Item className="form_item">
+          <Button
+            type="primary"
+            onClick={handleSubmit}
+            className="btn_product_form"
+          >
             {editMode && productToUpdate ? "Edit" : "Add"}
           </Button>
         </Form.Item>

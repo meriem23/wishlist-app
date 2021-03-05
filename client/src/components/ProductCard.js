@@ -20,7 +20,7 @@ const ProductCard = ({ content, setContent }) => {
     }
   };
   return !editMode ? (
-    <div className="cardStyle">
+    <div className="card_style">
       {content.Name ? (
         <Card
           style={{ width: 290 }}

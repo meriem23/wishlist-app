@@ -25,7 +25,7 @@ const ProductList = ({ content, setContent }) => {
   };
 
   return !editMode ? (
-    <div className="prodStyle">
+    <div className="prod_style">
       {content ? (
         <div>
           <Row
@@ -51,7 +51,7 @@ const ProductList = ({ content, setContent }) => {
             </div>
           </Row>
           <Row>
-            <Tabs defaultActiveKey="1" className="tabStyle">
+            <Tabs defaultActiveKey="1" className="tab_style">
               <TabPane tab="To Buy" key="1">
                 {content.product &&
                   content.product

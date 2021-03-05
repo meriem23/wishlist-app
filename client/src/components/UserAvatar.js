@@ -20,7 +20,7 @@ const UserAvatar = () => {
     </Menu>
   );
   return (
-    <div className="avatarHover">
+    <div className="avatar_hover">
       <Avatar
         style={{ backgroundColor: "#4bb2f2" }}
         size={45}

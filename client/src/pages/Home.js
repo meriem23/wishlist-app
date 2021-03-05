@@ -35,7 +35,7 @@ const Home = () => {
             className="tabStyle"
           >
             <TabPane
-              tab={<i className="far fa-heart iconStyle"> Wishlist</i>}
+              tab={<i className="far fa-heart icon_style"> Wishlist</i>}
               key="1"
             >
               <Row>

@@ -26,7 +26,7 @@ const SideBar = ({ type, setContent }) => {
   return (
     <div>
       <Menu
-        style={{ width: 200, height: "85vh" }}
+        className="sidebar"
         defaultSelectedKeys={["1"]}
         defaultOpenKeys={["sub1"]}
         onClick={showModal}
@@ -41,7 +41,7 @@ const SideBar = ({ type, setContent }) => {
           ) : (
             <Text className="textStyle">
               <PlusOutlined
-                style={{ color: "#4bb2f2", marginRight: 20, fontSize: 15 }}
+                style={{ color: "#4bb2f2", marginRight: 10, fontSize: 16 }}
               />
               Add Product
             </Text>
