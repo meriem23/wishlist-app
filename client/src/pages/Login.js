@@ -80,7 +80,7 @@ const Login = () => {
             </Button>
           </Form.Item>
         </Form>
-        <Title level={5}>
+        <Title level={5} style={{ fontWeight: 400 }}>
           Don't have an account? <Link to="/register">Create one now!</Link>
         </Title>
       </div>

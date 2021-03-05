@@ -87,31 +87,25 @@ const ProductAdd = ({ editMode, setEditMode, content }) => {
   return (
     <div className="add_form_style">
       <div className="form_text">
-        <div className="blue_line"></div>
         <Title
           level={3}
-          // style={{
-          //   color: "#00468c",
-          //   textTransform: "upperCase",
-          //   fontSize: 24,
-          //   fontWeight: 700,
-          //   marginBottom: 0,
-          // }}
+          style={{
+            color: "#4bb2f2",
+            textTransform: "upperCase",
+            fontSize: 20,
+            fontWeight: 400,
+          }}
         >
           Add Product
         </Title>
-        <div className="blue_line"></div>
       </div>
 
       <Form
         form={form}
         style={{
-          width: 310,
-          // justifyContent: "center",
+          width: 150,
           display: "flex",
           flexDirection: "column",
-          // marginTop: 15,
-          // fontSize: "20 !important",
         }}
         initialValues={{ remember: false }}
         {...layout}
@@ -195,13 +189,9 @@ const ProductAdd = ({ editMode, setEditMode, content }) => {
             ))}
           </Select>
         </Form.Item>
-        <Form.Item
-          className="form_item form_item_label_img"
-          label="Add Image"
-          name="image"
-        >
+        <Form.Item className="form_item form_item_label_img" name="image">
           <Input
-            // className="add_product_input add_product_input_img"
+            className="add_product_input add_product_image"
             prefix={<FileImageOutlined style={{ color: "#4bb2f2" }} />}
             type="file"
             name="Image"

@@ -101,7 +101,7 @@ const Register = () => {
             </Button>
           </Form.Item>
         </Form>
-        <Title level={5}>
+        <Title level={5} style={{ fontWeight: 400 }}>
           Already have an account? <Link to="/">Sign in now!</Link>
         </Title>
       </div>
