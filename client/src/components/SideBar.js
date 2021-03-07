@@ -39,7 +39,10 @@ const SideBar = ({ type, setContent }) => {
           {type === "wishlist" ? (
             <WishlistModal />
           ) : (
-            <Text className="textStyle">
+            <Text
+              className="textStyle"
+              style={{ color: "#4bb2f2", fontSize: 16 }}
+            >
               <PlusOutlined
                 style={{ color: "#4bb2f2", marginRight: 10, fontSize: 16 }}
               />

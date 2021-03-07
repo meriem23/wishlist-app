@@ -29,7 +29,7 @@ const ProductList = ({ content, setContent }) => {
       {content ? (
         <div>
           <Row
-            gutter={200}
+            // gutter={500}
             align="middle"
             style={{
               marginLeft: 50,
@@ -57,12 +57,13 @@ const ProductList = ({ content, setContent }) => {
                   content.product
                     .filter((el) => "To Buy" === el.Status)
                     .map((el) => (
-                      <div
-                        style={{
-                          display: "flex",
-                        }}
-                      >
-                        <Text> Product Name: {el.Name}</Text>
+                      <div>
+                        <div className="wish_content_style">
+                          <Text> {el.Name}</Text>
+                          <Text> {el.Description}</Text>
+                          <Text> {el.Price}</Text>
+                        </div>
+                        <div className="blue_line"></div>
                       </div>
                     ))}
               </TabPane>
@@ -71,12 +72,13 @@ const ProductList = ({ content, setContent }) => {
                   content.product
                     .filter((el) => "Bought" === el.Status)
                     .map((el) => (
-                      <div
-                        style={{
-                          display: "flex",
-                        }}
-                      >
-                        <Text> Product Name: {el.Name}</Text>
+                      <div>
+                        <div className="wish_content_style">
+                          <Text> {el.Name}</Text>
+                          <Text> {el.Description}</Text>
+                          <Text> {el.Price}</Text>
+                        </div>
+                        <div className="blue_line"></div>
                       </div>
                     ))}
               </TabPane>

@@ -191,7 +191,7 @@ const ProductAdd = ({ editMode, setEditMode, content }) => {
         </Form.Item>
         <Form.Item className="form_item form_item_label_img" name="image">
           <Input
-            className="add_product_input add_product_image"
+            className="add_product_input "
             prefix={<FileImageOutlined style={{ color: "#4bb2f2" }} />}
             type="file"
             name="Image"

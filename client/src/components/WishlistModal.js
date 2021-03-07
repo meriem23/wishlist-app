@@ -73,7 +73,7 @@ const WishlistModal = ({ editMode, setEditMode, content }) => {
           <Form.Item name="wishlist">
             <Input
               prefix={<HeartOutlined style={{ color: "#4bb2f2" }} />}
-              style={{ width: "155%" }}
+              style={{ width: "130%" }}
               placeholder="Name"
               name="wishlist"
               onChange={handleChange}

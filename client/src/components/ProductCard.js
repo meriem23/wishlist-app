@@ -63,7 +63,9 @@ const ProductCard = ({ content, setContent }) => {
               <Text>
                 <span>Status: </span> {content.Status}
               </Text>
-              <Text style={{ marginLeft: "5px" }}>
+            </div>
+            <div>
+              <Text>
                 <span>Wishlist: </span>
                 {content.WishlistName}
               </Text>
